@@ -1,0 +1,6 @@
+[data-component-id="compass:views_mini_pager"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:views_mini_pager"] li {
+    @apply inline-block;
+}

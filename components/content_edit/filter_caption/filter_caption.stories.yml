@@ -1,0 +1,33 @@
+title: compass/components/content_edit/Filter Caption
+parameters:
+  sourceLink: 'compass:filter_caption'
+argTypes:
+  align:
+    control: inline-radio
+    options:
+      LEFT: 'left'
+      CENTER: 'center'
+      RIGHT: 'right'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_body
+      view_mode: default
+      langcode: ''
+      check_access: true
+      caption: My caption
+      src: https://www.drupal.org/files/project-images/cl-components-logo.png
+      width: '30%'
+      align: 'center'
+      content: |
+        {% set mock_caption = '<p>&nbsp;</p><img data-entity-type="file" src="'~src~'" data-align="'~align~'" data-caption="'~caption~'" width="'~width~'"><p>&nbsp;</p>' %}
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalField($field_name, $entity_type, $entity_id, $view_mode, $langcode, $check_access);
+        $field[0]['#text'] = $mock_caption . $field[0]['#text'];
+        $field[0]['#format'] = 'full_html';
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

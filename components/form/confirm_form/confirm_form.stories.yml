@@ -1,0 +1,24 @@
+title: compass/components/form/Confirm Form
+parameters:
+  sourceLink: 'compass:confirm_form'
+stories:
+  - name: 1. Default
+    args:
+      entity_type: node
+      entity_id: 1
+      view_mode: delete
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $form = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [], $check_access);
+        $form['title'] = [
+          '#type' => 'component',
+          '#component' => 'compass:page_title',
+          '#props' => [
+            'title' => $form['#title'],
+          ],
+        ];
+        return \Drupal::service('renderer')->render($form);
+        " %}
+        {{ code|php|raw }}

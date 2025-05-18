@@ -1,0 +1,126 @@
+{#
+/**
+ * @file
+ * Theme override to display a pager.
+ *
+ * Available variables:
+ * - attributes: The attributes generated in the template preprocess.
+ * - heading_id: Pagination heading ID.
+ * - items: List of pager items.
+ *   The list is keyed by the following elements:
+ *   - first: Item for the first page; not present on the first page of results.
+ *   - previous: Item for the previous page; not present on the first page
+ *     of results.
+ *   - next: Item for the next page; not present on the last page of results.
+ *   - last: Item for the last page; not present on the last page of results.
+ *   - pages: List of pages, keyed by page number.
+ *   Sub-sub elements:
+ *   items.first, items.previous, items.next, items.last, and each item inside
+ *   items.pages contain the following elements:
+ *   - href: URL with appropriate query parameters for the item.
+ *   - attributes: A keyed list of HTML attributes for the item.
+ *   - text: The visible text used for the item link, such as "‹ Previous"
+ *     or "Next ›".
+ * - current: The page number of the current page.
+ * - ellipses: If there are more pages than the quantity allows, then an
+ *   ellipsis before or after the listed pages may be present.
+ *   - previous: Present if the currently visible list of pages does not start
+ *     at the first page.
+ *   - next: Present if the visible list of pages ends before the last page.
+ *
+ * @see core/includes/theme.inc::template_preprocess_pager()
+ */
+#}
+{% block content %}
+{% if items %}
+    <div {{ attributes.addClass('mt-12') }}>
+        <nav class="pager mx-auto border-t border-gray-200 px-4 flex items-center justify-between sm:px-0" role="navigation" aria-labelledby="{{ heading_id }}">
+            <h4 id="{{ heading_id }}" class="sr-only">{{ 'Pagination'|t }}</h4>
+            <div class="w-0 flex-1 flex -mt-px gap-x-4">
+
+                {# Print first item if we are not on the first page. #}
+                {% if items.first %}
+                <div class="pager__item--first">
+                    <a href="{{ items.first.href }}" title="{{ 'Go to first page'|t }}"{{ items.first.attributes|without('href', 'title').addClass('border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-400 transition ease-in-out duration-150') }}>
+                        <svg class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">{{ 'First page'|t }}</span>
+                        <span aria-hidden="true">{{ items.first.text|default('First'|t) }}</span>
+                    </a>
+                </div>
+                {% endif %}
+                {# Print previous item if we are not on the first page. #}
+                {% if items.previous %}
+                <div class="pager__item--previous">
+                    <a href="{{ items.previous.href }}" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel').addClass('border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-400 transition ease-in-out duration-150') }}>
+                        <svg class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">{{ 'Previous page'|t }}</span>
+                        <span aria-hidden="true">{{ items.previous.text|default('Previous'|t) }}</span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="hidden md:-mt-1 md:flex">
+                {# Add an ellipsis if there are further previous pages. #}
+                {% if ellipses.previous %}
+                    <div class="pager__item--ellipsis"{# role="presentation"#}>&hellip;</div>
+                {% endif %}
+
+                {# Now generate the actual pager piece. #}
+                {% for key, item in items.pages %}
+                    <div class="{{ current == key ? ' is-active *:border-primary-500 *:text-primary-600' : ' *:border-transparent *:text-gray-500 *:hover:text-gray-700 *:hover:border-gray-300' }}">
+                        {% if current == key %}
+                            {% set title = 'Current page'|t %}
+                        {% else %}
+                            {% set title = 'Go to page @key'|t({'@key': key}) %}
+                        {% endif %}
+                        <a href="{{ item.href }}" title="{{ title }}"{{ item.attributes|without('href', 'title').addClass('inline-flex items-center px-4 pt-4 border-t-2 text-sm font-medium') }}>
+                            <span class="sr-only">
+                                {{ current == key ? 'Current page'|t : 'Page'|t }}
+                            </span>
+                            {{- key -}}
+                        </a>
+                    </div>
+                {% endfor %}
+
+                {# Add an ellipsis if there are further next pages. #}
+                {% if ellipses.next %}
+                    <div class="pager__item--ellipsis"{# role="presentation"#}>&hellip;</div>
+                {% endif %}
+            </div>
+
+            <div class="-mt-px flex w-0 flex-1 gap-x-4 justify-end">
+                {# Print next item if we are not on the last page. #}
+                {% if items.next %}
+                <div class="pager__item--next">
+                    <a href="{{ items.next.href }}" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel').addClass('inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700') }}>
+                        <span class="sr-only">{{ 'Next page'|t }}</span>
+                        <span aria-hidden="true">{{ items.next.text|default('Next'|t) }}</span>
+                        <svg class="ml-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+                {% endif %}
+
+                {# Print last item if we are not on the last page. #}
+                {% if items.last %}
+                <div class="pager__item--last">
+                    <a href="{{ items.last.href }}" title="{{ 'Go to last page'|t }}"{{ items.last.attributes|without('href', 'title').addClass('inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700') }}>
+                        <span class="sr-only">{{ 'Last page'|t }}</span>
+                        <span aria-hidden="true">{{ items.last.text|default('Last'|t) }}</span>
+                        <svg class="ml-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M15.28 9.47a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06L13.69 10 9.97 6.28a.75.75 0 0 1 1.06-1.06l4.25 4.25ZM6.03 5.22l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L8.69 10 4.97 6.28a.75.75 0 0 1 1.06-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+title: compass/components/block/Local Actions Block
+parameters:
+ sourceLink: 'compass:local_actions_block'
+stories:
+  - name: 1. Mock Actions
+    args:
+      action_text: 'My Action'
+      actions_block_content: |
+        {% set code = "
+        function system_menu_local_actions_alter(&$local_actions) {
+          $local_actions['system.example_task_1'] = [
+            'route_name' => 'contact.site_page',
+            'title' => '" ~ action_text ~ ' (primary)' ~ "',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalActionDefault',
+            'options' => [
+              'attributes' => [
+                'class' => ['button--primary'],
+              ],
+            ],
+            'appears_on' => ['cl_server.render'],
+            'weight' => 0,
+          ];
+          $local_actions['system.example_task_2'] = [
+            'route_name' => 'contact.site_page',
+            'title' => '" ~ action_text ~ ' (regular)' ~ "',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalActionDefault',
+            'options' => [],
+            'appears_on' => ['cl_server.render'],
+            'weight' => 1,
+          ];
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $block = $tweak::drupalBlock('local_actions_block', $configuration = [], $wrapper = TRUE);
+        return \Drupal::service('renderer')->render($block);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Rendered on route
+    args:
+      route: 'view.my_frontpage.page_1'
+      actions_block_content: |
+        {% set pattern = "%
+        <!-- BEGIN OUTPUT from 'themes/compass/templates/block/block--local-actions-block.html.twig' -->
+        (.*)
+        <!-- END OUTPUT from 'themes/compass/templates/block/block--local-actions-block.html.twig' -->
+        %msU" %}
+        {% set code = "
+        $url = \\\Drupal\\\Core\\\Url::fromRoute($route, [], ['absolute' => TRUE])->toString();
+        $markup = \Drupal::httpClient()->get($url)->getBody()->__toString();
+        preg_match($pattern, $markup, $matches);
+        return $matches[1] ?? 'No regex match. Is the Twig debug enabled and the route is accessible by anon user and has actions?';
+        " %}
+        {{ code|php|raw }}
+        {% set mock_load_libraries %}
+          {% include 'compass:block' %}
+          {% include 'compass:menu_local_action' %}
+        {% endset %}

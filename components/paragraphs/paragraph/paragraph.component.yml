@@ -1,0 +1,14 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Paragraph
+status: stable
+description: Display base paragraph.
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+slots:
+  user_content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

@@ -1,0 +1,16 @@
+title: compass/components/content/Links  Node
+parameters:
+  sourceLink: 'compass:links__node'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      view_mode: teaser
+      langcode: 'en'
+      content: |
+        {% set code = "
+        $builder = \Drupal::service('entity_type.manager')->getViewBuilder('node');
+        $links = $builder->renderLinks($entity_id, $view_mode, $langcode, $is_in_preview = FALSE, $revision_id = NULL);
+        return \Drupal::service('renderer')->render($links);
+        " %}
+        {{ code|php|raw }}

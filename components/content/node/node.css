@@ -1,0 +1,12 @@
+/**
+ * @file
+ * Visual styles for nodes.
+ * @see css/components/node.css
+ */
+
+[data-component-id="compass:node"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:node"].node--unpublished {
+    @apply bg-red-50;
+}

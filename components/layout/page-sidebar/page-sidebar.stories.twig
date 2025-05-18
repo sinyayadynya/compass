@@ -1,0 +1,64 @@
+{# page-login.stories.twig #}
+{% stories page_login with { title: 'compass/components/layout/Page Sidebar' } %}
+
+{% story default with {
+name: '1. Default',
+args: {
+content: 1,
+sidebar_first: 0,
+sidebar_second: 0,
+header: 0,
+primary_menu: 0,
+secondary_menu: 0,
+footer: 0,
+highlighted: 0,
+help: 0,
+breadcrumb: 0,
+logged_in: false,
+is_admin: false,
+is_front: true,
+base_path: '/',
+front_page: 'https://example.com',
+page_content: "
+<style>
+    /* Example region styling */
+    .region {
+        border: dashed 1px red;
+    }
+
+    .region-sidebar-first {
+        width: 30%;
+    }
+</style>
+{% macro get_words(region, words_number) %}
+{% if words_number %}
+{% set words = '<mark>' ~ region ~ '</mark>' %}
+{% for number in range(1, words_number) %}
+{% set words = words ~ ' word' ~ number %}
+{% endfor %}
+{% set content %}
+{{ words|raw }}
+{% endset %}
+{% include 'compass:region' %}
+{% endif %}
+{% endmacro %}
+{% set page = {
+content: {'#markup': _self.get_words('Content', content) },
+sidebar_first: {'#markup': _self.get_words('Sidebar First', sidebar_first) },
+sidebar_second: {'#markup': _self.get_words('Sidebar Second', sidebar_second) },
+header: {'#markup': _self.get_words('Header', header) },
+primary_menu: {'#markup': _self.get_words('Primary Menu', primary_menu) },
+secondary_menu: {'#markup': _self.get_words('Secondary Menu', secondary_menu) },
+footer: {'#markup': _self.get_words('Footer', footer) },
+highlighted: {'#markup': _self.get_words('Highlighted', highlighted) },
+help: {'#markup': _self.get_words('Help', help) },
+breadcrumb: {'#markup': _self.get_words('Breadcrumb', breadcrumb) },
+} %}
+{% include 'compass:page-centered' %}
+"
+}
+} %}
+{{ page_content|raw }}
+{% endstory %}
+
+{% endstories %}

@@ -1,0 +1,18 @@
+/**
+ * @file
+ * Basic styling for comment module.
+ * @see css/components/indented.css
+ */
+
+[data-component-id="compass:comment"] {
+  /* Add your styles here */
+}
+/**
+ * Indent threaded comments.
+ */
+[data-component-id="compass:comment"] ~ .indented {
+    @apply ml-6;
+}
+[dir="rtl"] [data-component-id="compass:comment"] ~ .indented {
+    @apply mr-6 ml-0;
+}

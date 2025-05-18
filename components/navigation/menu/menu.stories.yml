@@ -1,0 +1,12 @@
+title: compass/components/navigation/Menu
+parameters:
+ sourceLink: 'compass:menu'
+stories:
+  - name: 1. Default
+    args:
+      menu_name: main
+      level: 1
+      depth: 0
+      expand: false
+      content: |
+        {{ drupal_menu(menu_name, level, depth, expand) }}

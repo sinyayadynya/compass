@@ -1,0 +1,16 @@
+{% extends "compass:block" %}
+{#
+/**
+ * @file
+ * Theme override for tabs.
+ */
+#}
+{% block content %}
+  {% block tasks_block_content %}
+    {% if content %}
+      <nav class="tabs" role="navigation" aria-label="{{ configuration.label ?: 'Tabs'|t }}" data-component-id="compass:local_tasks_block">
+        {{ content }}
+      </nav>
+    {% endif %}
+  {% endblock %}
+{% endblock %}

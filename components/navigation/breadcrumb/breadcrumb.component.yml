@@ -1,0 +1,14 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Breadcrumb
+status: stable
+description: System breadcrumb sdc component.
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+slots:
+  content:
+    title: Breadcrumb
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

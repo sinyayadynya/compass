@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for vertical tabs.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The rendered tabs.
+ *
+ * @see template_preprocess_vertical_tabs()
+ */
+#}
+{% block content %}
+  <div data-component-id="{{ attributes['data-component-id'] }}">
+    {% set attributes = attributes.removeAttribute('data-component-id') %}
+    <div{{ attributes.setAttribute('data-vertical-tabs-panes', TRUE) }}>{{ children }}</div>
+  </div>
+{% endblock %}

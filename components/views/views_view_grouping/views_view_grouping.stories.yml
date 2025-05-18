@@ -1,0 +1,103 @@
+title: compass/components/views/Views View Grouping
+parameters:
+  sourceLink: 'compass:views_view_grouping'
+stories:
+  - name: 1. Default
+    args:
+      help: 'Requires at least two visible fields in the view to group by the "grouping_field_N".'
+      view_id: my_frontpage
+      display_id: page_1
+      grouping_field_0: status
+      grouping_field_1: changed
+      grouping_field_2: title
+      use_rendered_output_to_group_rows: true
+      remove_tags_from_rendered_output: true
+      add_views_row_classes: true
+      row_class: ''
+      view_content: |
+        {% set code = "
+        function system_views_pre_view($view, string $display_id, array $args) {
+          $title = [
+            'id' => 'title',
+            'table' => 'node_field_data',
+            'field' => 'title',
+            'relationship' => 'none',
+            'group_type' => 'group',
+            'entity_type' => 'node',
+            'entity_field' => 'title',
+            'plugin_id' => 'field',
+            'label' => 'Title',
+            'exclude' => false,
+            'type' => 'string',
+            'settings' =>
+            [
+              'link_to_entity' => true,
+            ]
+          ];
+          $changed = [
+            'id' => 'changed',
+            'field' => 'changed',
+            'entity_field' => 'changed',
+            'label' => 'Changed',
+            'type' => 'timestamp',
+            'settings' =>
+            [
+              'date_format' => 'medium',
+            ],
+          ] + $title;
+          $status = [
+            'id' => 'status',
+            'field' => 'status',
+            'entity_field' => 'status',
+            'plugin_id' => 'field',
+            'label' => 'Published',
+            'type' => 'boolean',
+            'settings' =>
+            [
+              'format' => 'yes-no',
+            ],
+          ] + $title;
+          $fields = $view->display_handler->options['fields'];
+          $fields['changed'] = $changed;
+          $fields['status'] = $status;
+          $fields['title'] = $title;
+          // $fields['title']['exclude'] = TRUE;
+          $view->display_handler->overrideOption('fields', $fields);
+        }
+        $view = \Drupal::service('entity_type.manager')->getStorage('view')
+          ->load($view_id)->getExecutable();
+        $view->setDisplay($display_id);
+        $style = [
+          'type' => 'default',
+          'options' =>
+          [
+            'grouping' =>
+            [
+              0 =>
+              [
+                'field' => $grouping_field_0,
+                'rendered' => $use_rendered_output_to_group_rows,
+                'rendered_strip' => $remove_tags_from_rendered_output,
+              ],
+              1 =>
+              [
+                'field' => $grouping_field_1,
+                'rendered' => $use_rendered_output_to_group_rows,
+                'rendered_strip' => $remove_tags_from_rendered_output,
+              ],
+              2 =>
+              [
+                'field' => $grouping_field_2,
+                'rendered' => $use_rendered_output_to_group_rows,
+                'rendered_strip' => $remove_tags_from_rendered_output,
+              ],
+            ],
+            'row_class' => $row_class,
+            'default_row_class' => $add_views_row_classes,
+          ],
+        ];
+        $view->display_handler->overrideOption('style', $style);
+        $view->preview();
+        return \Drupal::service('renderer')->render($view->render());
+        " %}
+        {{ code|php|raw }}

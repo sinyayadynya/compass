@@ -1,0 +1,10 @@
+title: compass/components/views/Views View
+parameters:
+  sourceLink: 'compass:views_view'
+stories:
+  - name: 1. Default
+    args:
+      view_id: my_frontpage
+      display_id: page_1
+      content: |
+        {{ drupal_view(view_id, display_id) }}

@@ -1,0 +1,57 @@
+title: compass/components/content_edit/Text Format Wrapper
+parameters:
+  sourceLink: 'compass:text_format_wrapper'
+stories:
+  - name: 1. Add Form
+    args:
+      entity_type: node
+      bundle: my_article
+      field_name: field_my_body
+      view_mode: default
+      check_access: false
+      description: ''
+      user_id: 1
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, NULL, $view_mode, [
+          'type' => $bundle,
+        ], $check_access)[$field_name]['widget'];
+        if ($description) {
+          $field['widget'][0]['#description'] = $description;
+        }
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Edit Form
+    args:
+      entity_type: node
+      entity_id: 1
+      field_name: field_my_body
+      view_mode: default
+      check_access: false
+      user_id: 1
+      description: ''
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [
+        ], $check_access)[$field_name]['widget'];
+        if ($description) {
+          $field[0]['#description'] = $description;
+        }
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

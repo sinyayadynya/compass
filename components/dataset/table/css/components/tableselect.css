@@ -1,0 +1,20 @@
+/**
+ * @file
+ * Table select behavior.
+ *
+ * @see tableselect.js
+ * @see css/components/tableselect.css
+ */
+
+[data-component-id="compass:table"] tr.selected td {
+    @apply bg-yellow-100;
+}
+[data-component-id="compass:table"] td.checkbox,
+[data-component-id="compass:table"] th.checkbox {
+    @apply text-center;
+}
+[dir="rtl"] [data-component-id="compass:table"] td.checkbox,
+[dir="rtl"] [data-component-id="compass:table"] th.checkbox {
+  /* This is required to win over specificity of [dir="rtl"] td */
+    @apply text-center;
+}

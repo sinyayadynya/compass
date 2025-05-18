@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for confirm form.
+ *
+ * By default this does not alter the appearance of a form at all,
+ * but is provided as a convenience for themers.
+ *
+ * Available variables:
+ * - form: The confirm form.
+ */
+#}
+{% block content %}
+  <div data-component-id={{ attributes['data-component-id'] }}>
+    {% set attributes = attributes.removeAttribute('data-component-id') %}
+    {{ form }}
+  </div>
+{% endblock %}

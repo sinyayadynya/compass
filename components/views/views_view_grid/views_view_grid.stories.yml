@@ -1,0 +1,42 @@
+title: compass/components/views/Views View Grid
+parameters:
+  sourceLink: 'compass:views_view_grid'
+argTypes:
+  alignment:
+    control: inline-radio
+    options:
+      HORIZONTAL: horizontal
+      VERTICAL: vertical
+stories:
+  - name: 1. Default
+    args:
+      view_id: my_frontpage
+      display_id: page_1
+      columns_number: 2
+      alignment: horizontal
+      content: |
+        {% set code = "
+        $view = \Drupal::service('entity_type.manager')->getStorage('view')
+          ->load($view_id)->getExecutable();
+        $view->setDisplay($display_id);
+        $style = [
+          'type' => 'grid',
+          'options' =>
+          [
+            'grouping' =>
+            [
+            ],
+            'columns' => $columns_number,
+            'automatic_width' => true,
+            'alignment' => $alignment,
+            'row_class_custom' => '',
+            'row_class_default' => true,
+            'col_class_custom' => '',
+            'col_class_default' => true,
+          ],
+        ];
+        $view->display_handler->overrideOption('style', $style);
+        $view->preview();
+        return \Drupal::service('renderer')->render($view->render());
+        " %}
+        {{ code|php|raw }}

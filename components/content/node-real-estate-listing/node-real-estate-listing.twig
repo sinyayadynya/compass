@@ -1,0 +1,205 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: (optional) The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'relative mx-auto max-w-7xl',
+  ]
+%}
+{% block node_content %}
+	<article {{attributes.addClass(classes)}}>
+
+        <div class="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl mask-b-from-60% sm:h-88 md:h-112 lg:-inset-x-4 lg:h-128">
+            <img alt="" class="absolute inset-0 h-full w-full mask-l-from-60% object-cover object-center opacity-40"
+                src="{{ content.schema_image|render|striptags('<img>')|trim|raw }}">
+            <div class="absolute inset-0 rounded-t-2xl outline-1 -outline-offset-1 outline-gray-950/10 dark:outline-white/10"></div>
+        </div>
+
+
+		<div {{content_attributes.addClass('node__content mx-auto max-w-6xl')}}>
+            <div class="relative">
+                <div class="px-4 pt-48 pb-12 lg:py-24">
+                    <div class="flex items-center gap-x-4 text-gray-950 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-8 w-8">
+                            <path fill="currentColor" fill-rule="nonzero" d="M18 5a5 5 0 0 0-5-5H7a5 5 0 0 0-5 5v13.927a1 1 0 0 0 1.623.782l3.684-2.93a4 4 0 0 1 2.49-.87H13a5 5 0 0 0 5-5V5Z" />
+                        </svg>
+                        <h1 class="text-2xl font-semibold">{{ label }}</h1>
+                    </div>
+
+                    <div class="mt-7 max-w-lg text-base/7 text-pretty text-gray-600 dark:text-gray-400">
+                        {{ content.schema_additional_type }}
+                    </div>
+
+                    <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-gray-950 sm:gap-3 dark:text-white">
+                        <div class="flex items-center gap-1.5">
+                            <svg viewBox="0 0 16 16" fill="none" class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0">
+                                <path
+                                    d="M13.5 12.5V.5H4.5M13.5 12.5l-.26.39c-.45.67-.45 1.48 0 2.15l.26.46H4c-.83 0-1.5-.67-1.5-1.5v0M13.5 12.5H4.5M2.5 14V2.5C2.5 1.4 3.4.5 4.5.5v0M2.5 14c0-.83.67-1.5 1.5-1.5h.5M4.5.5v12"
+                                    stroke-linejoin="round">
+                                </path>
+                            </svg>
+                            4 modules
+                        </div>
+                        <span class="hidden text-gray-950/25 sm:inline dark:text-white/25">·</span>
+                        <div class="flex items-center gap-1.5">
+                            <svg viewBox="0 0 16 16" fill="none" class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0">
+                                <path
+                                    d="M10.5 4.5H6.5c-.55 0-1 .45-1 1v6m4-7h3c.55 0 1 .45 1 1v9c0 .55-.45 1-1 1H6.5c-.55 0-1-.45-1-1v-3m4-7V1.5c0-.55-.45-1-1-1h-7c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h3">
+                                </path>
+                            </svg>
+                            20 lessons
+                        </div>
+                        <span class="hidden text-gray-950/25 sm:inline dark:text-white/25">·</span>
+                        <div class="flex items-center gap-1.5">
+                            <svg viewBox="0 0 16 16" fill="none" class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0">
+                                <circle cx="8" cy="8" r="7.5"></circle>
+                                <path d="M8 4V8H12"></path>
+                            </svg>
+                            3 hr 26 min
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <a class="inline-flex items-center gap-x-2 rounded-full bg-gray-950 px-3 py-0.5 text-sm/7 font-semibold text-white hover:bg-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600"
+                            href="/landscape-of-choice">
+                            <svg viewBox="0 0 8 8" fill="none" class="fill-white h-2 shrink-0">
+                                <path
+                                    d="M7.25 3.567a.5.5 0 0 1 0 .866L2.75 7.031a.5.5 0 0 1-.75-.433V1.402a.5.5 0 0 1 .75-.433l4.5 2.598Z">
+                                </path>
+                            </svg>
+                            VR video
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-y-16 pb-10 sm:px-4">
+                    <section id="orientation" class="grid grid-cols-4 border-t border-gray-950/10 dark:border-white/10">
+                        <div class="col-span-full sm:col-span-1">
+                            <div class="-mt-px inline-flex border-t border-gray-950 pt-px dark:border-white">
+                                <div class="pt-4 text-sm/7 font-semibold text-gray-950 sm:pt-10 dark:text-white">
+                                    Style
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-full pt-6 sm:col-span-3 sm:pt-10">
+                            <div class="max-w-2xl">
+                                <h2 class="text-2xl/7 font-medium tracking-tight text-pretty text-gray-950 dark:text-white">
+                                    Traditional Cycladic, whitewashed with blue accents
+                                </h2>
+                                <div class="mt-4 text-base/7 text-gray-700 sm:text-sm/7 dark:text-gray-400">
+                                    {{ content.body }}
+                                </div>
+                                <ol class="mt-6 space-y-4">
+                                    <li>
+                                        <div class="flow-root">
+                                            <a class="-mx-3 -my-2 flex gap-3 rounded-xl px-3 py-2 text-sm/7 hover:bg-gray-950/4 dark:hover:bg-white/5"
+                                                href="/landscape-of-choice">
+                                                <div class="flex h-lh shrink items-center">
+                                                    <svg viewBox="0 0 16 16" fill="none"
+                                                        class="fill-gray-950 stroke-gray-950/40 dark:fill-white dark:stroke-white/40 h-4 shrink-0">
+                                                        <circle fill="none" cx="8" cy="8" r="7.5"></circle>
+                                                        <path stroke="none"
+                                                            d="M10.25 7.56699C10.5833 7.75944 10.5833 8.24056 10.25 8.43301L7.25 10.1651C6.91667 10.3575 6.5 10.117 6.5 9.73205L6.5 6.26795C6.5 5.88305 6.91667 5.64249 7.25 5.83494L10.25 7.56699Z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <span class="font-semibold text-gray-950 dark:text-white">
+                                                            The Landscape of Choice
+                                                        </span>
+                                                        <span
+                                                            class="mx-2 hidden text-gray-950/25 sm:inline dark:text-white/25">·</span>
+                                                        <span class="hidden text-gray-500 sm:inline">14:36</span>
+                                                    </div>
+                                                    <p class="text-gray-700 dark:text-gray-400">
+                                                        A practical map for navigating the illusion that you actually have any
+                                                        agency at all.
+                                                    </p>
+                                                    <div class="text-gray-500 sm:hidden">14:36</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+		</div>
+
+	</article>
+{% endblock %}

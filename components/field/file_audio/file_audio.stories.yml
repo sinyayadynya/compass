@@ -1,0 +1,23 @@
+title: compass/components/field/File Audio
+parameters:
+  sourceLink: 'compass:file_audio'
+stories:
+  - name: 1. Media file
+    args:
+      entity_id: 1
+      entity_type: media
+      view_mode: default
+      langcode: ''
+      check_access: true
+      content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 2. Entity field
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_media_audio
+      view_mode: default
+      langcode: ''
+      check_access: true
+      content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}

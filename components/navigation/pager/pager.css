@@ -1,0 +1,18 @@
+/**
+ * @file
+ * Visual styles for pager.
+ * @see css/components/pager.css
+ */
+
+[data-component-id="compass:pager"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:pager"] .pager__items {
+    /* Add your styles here */
+}
+[data-component-id="compass:pager"] .pager__item {
+    /* Add your styles here */
+}
+[data-component-id="compass:pager"] .pager__item.is-active {
+    /* Add your styles here */
+}

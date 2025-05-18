@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Theme override to display a single Drupal page while offline.
+ *
+ * All available variables are mirrored in page.html.twig.
+ * Some may be blank but they are provided for consistency.
+ *
+ * @see template_preprocess_maintenance_page()
+ */
+#}
+{% block content %}
+    <div {{ attributes.addClass('layout-container') }}>
+        <header role="banner">
+            {% if logo or site_name or site_slogan %}
+                {% set site_logo = logo ?: '' %}
+                {% include 'compass:system_branding_block' %}
+            {% endif %}
+        </header>
+        <main role="main" class="mx-auto flex w-full max-w-7xl flex-auto flex-col justify-center px-6 py-24 sm:py-64 lg:px-8">
+            {% if title %}
+                <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">{{ title }}</h1>
+            {% endif %}
+            {{ page.highlighted }}
+            <div class="mt-6 text-base leading-7 text-gray-600">{{ page.content }}</div>
+        </main>
+        {% if page.sidebar_first %}
+            <aside class="layout-sidebar-first" role="complementary">
+                {{ page.sidebar_first }}
+            </aside>{# /.layout-sidebar-first #}
+        {% endif %}
+        {% if page.sidebar_second %}
+            <aside class="layout-sidebar-second" role="complementary">
+                {{ page.sidebar_second }}
+            </aside>{# /.layout-sidebar-second #}
+        {% endif %}
+        {% if page.footer %}
+        <footer role="contentinfo">
+            {{ page.footer }}
+        </footer>
+    {% endif %}
+    </div>{# /.layout-container #}
+{% endblock %}

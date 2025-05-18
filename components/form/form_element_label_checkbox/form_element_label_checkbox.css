@@ -1,0 +1,8 @@
+[data-component-id="compass:form_element_label_checkbox"] label {
+  /* Add your styles here and enable in main.scss */
+    /* @apply text-gray-900; */
+}
+
+.page-node-type-contact-page [data-component-id="compass:form_element_label_checkbox"] {
+    @apply text-white;
+}

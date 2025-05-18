@@ -1,0 +1,24 @@
+/**
+ * @file
+ * Image upload widget.
+ ^ @see css/components/image-widget.css
+ */
+
+[data-component-id="compass:image_widget"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:image_widget"] .image-preview {
+    @apply float-left pt-0 pr-2.5 pb-2.5 pl-0;
+}
+[dir="rtl"] [data-component-id="compass:image_widget"] .image-preview {
+    @apply float-right pt-0 pr-0 pb-2.5 pl-2.5;
+}
+[data-component-id="compass:image_widget"] .image-widget-data {
+    @apply float-right;
+}
+[dir="rtl"] [data-component-id="compass:image_widget"] .image-widget-data {
+    @apply float-right;
+}
+[data-component-id="compass:image_widget"] .image-widget-data .text-field {
+    @apply w-auto;
+}

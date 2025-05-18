@@ -1,0 +1,32 @@
+title: compass/components/content_edit/Node Edit Form
+parameters:
+  sourceLink: 'compass:node_edit_form'
+stories:
+  - name: 1. Add Form
+    args:
+      entity_type: node
+      bundle: my_article
+      view_mode: default
+      check_access: false
+      content: |
+        {{ drupal_entity_form(entity_type, null, view_mode, {type: bundle}, check_access) }}
+  - name: 2. Edit Form
+    args:
+      entity_type: node
+      entity_id: 1
+      view_mode: default
+      check_access: true
+      user_id: 1
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $form = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [], $check_access);
+        return \Drupal::service('renderer')->render($form);
+        " %}
+        {{ code|php|raw }}

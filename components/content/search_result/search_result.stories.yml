@@ -1,0 +1,22 @@
+title: compass/components/content/Search Result
+parameters:
+  sourceLink: 'compass:search_result'
+stories:
+  - name: 1. Page
+    args:
+      search_plugin: node
+      search_keys: 'neo quis'
+      content: |
+        {% set pattern = "%
+        <!-- BEGIN OUTPUT from 'themes/compass/templates/content/search-result.html.twig' -->
+        (.*)
+        <!-- END OUTPUT from 'themes/compass/templates/content/search-result.html.twig' -->
+        %msU" %}
+        {% set code = "
+        $base_url = \\\Drupal\\\Core\\\Url::fromRoute('<front>')->toString();
+        $url = $base_url . 'search/' . $search_plugin . '?keys=' . $search_keys;
+        $markup = \Drupal::httpClient()->get($url)->getBody()->__toString();
+        preg_match($pattern, $markup, $matches);
+        return $matches[1] ?? 'No regex match. Is the Twig debug enabled and route is accessible by anon user and has search results?';
+        " %}
+        {{ code|php|raw }}

@@ -1,0 +1,26 @@
+name: Compass
+type: theme
+base theme: false
+starterkit: true
+core_version_requirement: ^10 || ^11
+dependencies:
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'twig_tweak:twig_tweak'
+  - 'simplify_menu:simplify_menu'
+version: 1.0.0-beta1
+libraries:
+  - compass/global
+libraries-override:
+  ai_chatbot/ai_chatbot:
+    js:
+      js/form-stream.js: false
+    css:
+      theme:
+        css/chat.css: false
+  core/normalize: false
+  system/base:
+    css:
+      component:
+        css/components/hidden.module.css: false
+generator: 'compass:1.0.0-beta1'

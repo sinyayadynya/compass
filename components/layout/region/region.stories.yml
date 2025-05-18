@@ -1,0 +1,27 @@
+title: compass/components/layout/Region
+parameters:
+  sourceLink: 'compass:region'
+argTypes:
+  region:
+    control: select
+    options:
+      sidebar_first: sidebar_first
+      sidebar_second: sidebar_second
+      content: content
+      header: header
+      primary_menu: primary_menu
+      secondary_menu: secondary_menu
+      footer: footer
+      highlighted: highlighted
+      help: help
+      page_top: page_top
+      page_bottom: page_bottom
+      breadcrumb: breadcrumb
+stories:
+  - name: 1. Default
+    args:
+      region: 'sidebar_first'
+      content: '<mark>My Content</markup>'
+      region_content: |
+        {% set content = {'#markup': content} %}
+        {% include 'compass:region' %}

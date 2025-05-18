@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* Base layer for font declarations */
+@layer base {
+    @font-face {
+      font-family: "Switzer";
+      font-display: swap;
+      src: url("/themes/custom/compass/fonts/Switzer-Variable.woff2") format("woff2");
+      font-weight: 100 900; /* Define the range for variable font */
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "GeistMono";
+      font-display: swap;
+      src: url("/themes/custom/compass/node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2")
+        format("woff2");
+      font-weight: 100 900; /* Define the range for variable font */
+      font-style: normal;
+    }
+}
+
+/* Alpine.js cloak */
+[x-cloak] { display: none !important; }
+
+/* Theme configuration */
+@theme {
+    /* Typography */
+    --font-heading: Switzer, system-ui, sans-serif;
+    --font-sans: Switzer, system-ui, sans-serif;
+    --font-mono: "GeistMono";
+
+    /* Custom spacing */
+    --spacing: 0.25rem;  /* Enable dynamic spacing scale */
+    --spacing-18: 4.5rem;
+    --spacing-112: 28rem;
+    --spacing-120: 30rem;
+
+    /* Border radius */
+    --radius-4xl: 2rem;
+
+    /* Container sizes */
+    --container-max-2xl: 40rem;
+
+    /* Gray color */
+    --color-gray-50: var(--color-slate-50);
+    --color-gray-100: var(--color-slate-100);
+    --color-gray-200: var(--color-slate-200);
+    --color-gray-300: var(--color-slate-300);
+    --color-gray-400: var(--color-slate-400);
+    --color-gray-500: var(--color-slate-500);
+    --color-gray-600: var(--color-slate-600);
+    --color-gray-700: var(--color-slate-700);
+    --color-gray-800: var(--color-slate-800);
+    --color-gray-900: var(--color-slate-900);
+    --color-gray-950: var(--color-slate-950);
+
+    /* Primary color */
+    --color-primary-50: var(--color-blue-50);
+    --color-primary-100: var(--color-blue-100);
+    --color-primary-200: var(--color-blue-200);
+    --color-primary-300: var(--color-blue-300);
+    --color-primary-400: var(--color-blue-400);
+    --color-primary-500: var(--color-blue-500);
+    --color-primary-600: var(--color-blue-600);
+    --color-primary-700: var(--color-blue-700);
+    --color-primary-800: var(--color-blue-800);
+    --color-primary-900: var(--color-blue-900);
+    --color-primary-950: var(--color-blue-950);
+
+    /* Remove unused color scales */
+    --color-emerald-*: initial;
+    --color-teal-*: initial;
+    --color-purple-*: initial;
+    --color-fuchsia-*: initial;
+    --color-pink-*: initial;
+    --color-rose-*: initial;
+    --color-zinc-*: initial;
+    --color-neutral-*: initial;
+    --color-stone-*: initial;
+}
+
+.prose h2,
+.prose h3 {
+    @apply font-semibold;
+}
+
+/* Provisory paddings */
+/* .region-secondary-menu,
+    .region-content {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+} */
+
+.visually-hidden {
+  @apply sr-only;
+}
+
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+  position: static !important;
+  overflow: visible;
+  clip: auto;
+  width: auto;
+  height: auto;
+}
+
+.invisible {
+  @apply invisible;
+}

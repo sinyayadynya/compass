@@ -1,0 +1,12 @@
+[data-component-id="compass:mark"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:mark"].marker--new {
+    @apply text-red-600;
+}
+[data-component-id="compass:mark"].marker--updated {
+    @apply text-green-700
+}
+[data-component-id="compass:mark"].marker--read {
+    @apply text-gray-600;
+}

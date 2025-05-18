@@ -1,0 +1,16 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Views View Grouping
+status: stable
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+#     content:
+#       type: array
+#       title: Content
+slots:
+  view_content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

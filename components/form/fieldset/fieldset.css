@@ -1,0 +1,13 @@
+@layer components {
+    [data-component-id="compass:fieldset"] legend {
+    @apply text-gray-700;
+    }
+
+    [data-component-id="compass:fieldset"].checkboxes--wrapper legend {
+    @apply text-white;
+    }
+
+    [data-component-id="compass:fieldset"].checkboxes--wrapper .fieldset-wrapper {
+    @apply mt-2;
+    }
+}

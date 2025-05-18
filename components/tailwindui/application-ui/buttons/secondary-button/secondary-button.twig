@@ -1,0 +1,12 @@
+{# <a href="{{ link }}" tabindex="0" class="px-4 py-3 bg-white/15 rounded-full text-navy-950 text-base/4 font-medium shadow-md inset-shadow-[0_0_2px_1px_#ffffff4d] ring ring-[#D15052]/15 transform transition-transform duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-xl">
+	{{ text }}
+</a> #}
+
+
+<div x-data="{ hover: false }" class="flex">
+	<a href="{{ link }}" class="flex flex-col justify-start px-4 py-3 rounded-full inset-shadow-[0_0_2px_1px_#ffffff4d] ring ring-[#D15052]/15 backdrop-blur-sm transition-transform duration-300" :class="{ 'bg-white/20 shadow-lg -translate-y-0.5': hover, 'bg-white/50 shadow-md': !hover }" :style="hover ? 'transform: perspective(1200px) translateY(-3px) scale(1) rotate(0deg) rotateX(0deg) rotateY(0deg) skewX(0deg) skewY(0deg) translateZ(0px); opacity: 1;' : 'transform: perspective(1200px) translateY(0px) scale(1) rotate(0deg) rotateX(0deg) rotateY(0deg) skewX(0deg) skewY(0deg) translateZ(0px); opacity: 1;'" @mouseover="hover = true" @mouseleave="hover = false">
+		<div class="outline-none">
+			<p class="text-navy-950 text-base/4 font-medium">{{ text }}</p>
+		</div>
+	</a>
+</div>

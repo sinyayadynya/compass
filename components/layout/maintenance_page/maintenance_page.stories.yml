@@ -1,0 +1,27 @@
+title: compass/components/layout/Maintenance Page
+parameters:
+  sourceLink: 'compass:maintenance_page'
+stories:
+  - name: 1. Default
+    args:
+      message: ''
+      sidebar_first: '<strong>My Sidebar First message</strong>'
+      sidebar_second: '<em>My Sidebar Second message</em>'
+      footer: '<small>My Footer message</small>'
+      content: |
+        {% set code = "
+        if (!$message) {
+          $message = \Drupal::service('maintenance_mode')->getSiteMaintenanceMessage();
+        }
+        $response = \Drupal::service('bare_html_page_renderer')
+          ->renderBarePage([
+            '#markup' => $message,
+          ], 'Site under maintenance', 'maintenance_page', [
+          '#show_messages' => TRUE,
+          'sidebar_first' => $sidebar_first ? ['#markup' => $sidebar_first] : '',
+          'sidebar_second' => $sidebar_second ? ['#markup' => $sidebar_second] : '',
+          'footer' =>  $footer ? ['#markup' => $footer] : '',
+        ]);
+        return $response->getContent();
+        " %}
+        {{ code|php|raw }}

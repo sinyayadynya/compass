@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override for a single local action link.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper element.
+ * - link: A rendered link element.
+ *
+ * @see template_preprocess_menu_local_action()
+ */
+#}
+{% block content %}
+  <ul data-component-id="{{ attributes['data-component-id'] }}">
+    {% set attributes = attributes.removeAttribute('data-component-id') %}
+    <li{{ attributes.addClass('my-4') }}>{{ link }}</li>
+  </ul>
+{% endblock %}

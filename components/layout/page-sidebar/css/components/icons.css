@@ -1,0 +1,20 @@
+/**
+ * @file
+ * Visual styles for icons.
+ */
+ .icon-help {
+    @apply py-px pr-0 pl-5;
+
+    background: url(/themes/custom/compass/components/layout/page/images/icons//help.svg) 0 50% no-repeat;
+}
+
+[dir="rtl"] .icon-help {
+  padding: 1px 20px 1px 0;
+  background-position: 100% 50%;
+}
+.feed-icon {
+    @apply block overflow-hidden w-4 h-4;
+
+    text-indent: -9999px;
+    background: url(/themes/custom/compass/components/layout/page/images/icons/feed.svg) no-repeat;
+}

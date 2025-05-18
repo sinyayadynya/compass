@@ -1,0 +1,17 @@
+[data-component-id="compass:block"] {
+    /* Add your styles here */
+}
+
+[data-component-id="compass:block"].block-help {
+    @apply max-w-5xl my-4 text-sm;
+}
+
+
+
+[data-component-id="compass:block"] h2 {
+    @apply mt-2 text-2xl font-medium tracking-tight text-gray-900 sm:text-3xl;
+}
+
+[data-component-id="compass:block"] h3 {
+    @apply mt-2 text-xl font-bold tracking-tight text-gray-900 sm:text-2xl;
+}

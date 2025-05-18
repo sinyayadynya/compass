@@ -1,0 +1,9 @@
+/**
+ * @file
+ * Visual styles for links.
+ * @see css/components/links.css
+ */
+
+[data-component-id="compass:links-dropbutton"] {
+  /* Add your styles here and enable in main.scss */
+}

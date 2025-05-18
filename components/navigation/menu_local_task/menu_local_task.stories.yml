@@ -1,0 +1,35 @@
+title: compass/components/navigation/Menu Local Task
+parameters:
+ sourceLink: 'compass:menu_local_task'
+stories:
+  - name: 1. Default
+    args:
+      route_name: 'contact.site_page'
+      task_title: 'Contact us'
+      active_tab: true
+      content: |
+        {% set code = "
+        function system_local_tasks_alter(&$local_tasks) {
+          $local_tasks['system.tab_0'] = [
+            'title' => '" ~ task_title ~ "',
+            'base_route' => 'cl_server.render',
+            'route_name' => 'cl_server.render',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'weight' => 0,
+          ];
+          $local_tasks['system.tab_1'] = [
+            'title' => '',
+            'base_route' => 'cl_server.render',
+            'route_name' => '" ~ route_name ~ "',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'weight' => 1,
+          ];
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $task = $tweak::drupalBlock('local_tasks_block', [], FALSE)['content']['#primary']['system.tab_0'];
+        $task['#active'] = $active_tab;
+        return \Drupal::service('renderer')->render($task);
+        " %}
+        {{ code|php|raw }}

@@ -1,0 +1,35 @@
+title: compass/components/content/Comment
+parameters:
+  sourceLink: 'compass:comment'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      entity_type: comment
+      view_mode: default
+      langcode: ''
+      check_access: true
+      comment_content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 2. Entity field
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_comment
+      view_mode: default
+      langcode: ''
+      check_access: true
+      user_id: 1
+      comment_content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalField($field_name, $entity_type, $entity_id, $view_mode, $langcode, $check_access);
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

@@ -1,0 +1,14 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Username
+status: stable
+description: Display username in node and comment view.
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+slots:
+  content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

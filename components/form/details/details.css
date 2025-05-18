@@ -1,0 +1,21 @@
+/**
+ * @file
+ * Collapsible details.
+ *
+ * @see collapse.js
+ * @see http://nicolasgallagher.com/css-background-image-hacks/
+ * @see css/components/details.css
+ */
+
+details[data-component-id="compass:details"] {
+    @apply my-4 border border-gray-300;
+}
+details[data-component-id="compass:details"] > .details-wrapper {
+    @apply py-2 px-6;
+}
+/* @todo Regression: The summary of uncollapsible details are no longer
+     vertically aligned with the .details-wrapper in browsers without native
+     details support. */
+[data-component-id="compass:details"] summary {
+    @apply py-1 px-2 cursor-pointer;
+}

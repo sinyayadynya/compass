@@ -1,0 +1,57 @@
+# Everything in this file is optional. Still, the file needs to exist. Adding
+# metadata here will improve the DX when using components.
+
+# This is so your IDE knows about the syntax for fixes and autocomplete.
+$schema: https://git.drupalcode.org/project/sdc/-/raw/1.x/src/metadata.schema.json
+
+# The human readable name.
+name: Content - Centered
+
+# Status can be: "experimental", "stable", "deprecated", "obsolete".
+status: experimental
+
+# Use this key to organize components together.
+group: Content
+
+# Schema for the props. We support www.json-schema.org. Learn more about the
+# syntax there.
+props:
+  # Props are always an object with keys. Each key is a variable in your
+  # component template.
+  type: object
+
+  # If your component has required properties, you list them here.
+  # required:
+  #   - primary
+
+  properties:
+    # The key is the name of the variable in the template.
+    attributes:
+      # This variable is an array of strings: ['foo', 'bar', 'baz'].
+      # This information is required for every prop.
+      type: Drupal\Core\Template\Attribute
+    classes:
+      type: array
+    content:
+      type: object
+    title_suffix:
+      type: array
+    # readmore:
+    #   type: array
+
+# Slots always hold arbitrary markup. We know that beforehand, so no need for
+# a schema for slots.
+slots:
+  # The key is the name of the slot. In your template you will use
+  # {% block body %}.
+  body:
+    # A human-readable name.
+    title: Body
+    # Mark it required if necessary.
+    required: true
+    # A description.
+    description: This is the body
+
+  # Only the key is required when declaring slots. This is how you declare a
+  # slot with minimal typing.
+  # minimal: {}

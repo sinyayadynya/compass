@@ -1,0 +1,82 @@
+title: compass/components/content_edit/File Upload Help
+parameters:
+  sourceLink: 'compass:file_upload_help'
+stories:
+  - name: 1. Default
+    args:
+      help_text: '<strong>My</strong> <em>field</em> help text.'
+      cardinality: -1
+      file_size: 1000
+      extensions: 'png jpeg'
+      resolution_max: 1000
+      resolution_min: 0
+      content: |
+        {#
+        Instructions to present to the user below this field on the editing form.
+        Allowed HTML tags: <a> <b> <big> <code> <del> <em> <i> <ins> <pre> <q> <small> <span> <strong> <sub> <sup> <tt> <ol> <ul> <li> <p> <br> <img>
+        This field supports tokens.
+        #}
+        {% set code = "
+        $variables = [
+          'description' => $help_text,
+          'cardinality' => $cardinality,
+          'upload_validators' => [
+            'file_validate_size' => [$file_size],
+            'file_validate_extensions' => [$extensions],
+            'file_validate_image_resolution' => [
+              $resolution_max,
+              $resolution_min,
+            ]
+          ],
+        ];
+        template_preprocess_file_upload_help($variables);
+        $array = [
+          '#type' => 'component',
+          '#component' => 'compass:file_upload_help',
+          '#props' => [
+            'descriptions' => $variables['descriptions'],
+          ]
+        ];
+        return \Drupal::service('renderer')->render($array);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Add Form
+    args:
+      entity_type: node
+      bundle: my_article
+      field_name: field_my_file
+      view_mode: default
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, NULL, $view_mode, [
+          'type' => $bundle,
+        ], $check_access)[$field_name]['widget'][0];
+        $description = ['#markup' => $field['#description']];
+        return \Drupal::service('renderer')->render($description);
+        " %}
+        {{ code|php|raw }}
+  - name: 3. Edit Form
+    args:
+      entity_type: node
+      entity_id: 1
+      field_name: field_my_file
+      view_mode: edit
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [
+        ], $check_access)[$field_name]['widget'];
+        foreach (range(0, 10) as $index) {
+          if (!isset($field[$index + 1])) {break;}
+        }
+        $description = ['#markup' => $field[$index]['#description']];
+        return \Drupal::service('renderer')->render($description);
+        " %}
+        {% set description %}
+          {{ code|php|raw }}
+        {% endset %}
+        {% set descriptions = [description] %}
+        {% include 'compass:file_upload_help' %}

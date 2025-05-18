@@ -1,0 +1,6 @@
+[data-component-id="compass:item_list__search_results"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:item_list__search_results"] .search-results {
+    @apply list-none;
+}

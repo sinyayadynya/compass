@@ -1,0 +1,13 @@
+title: compass/components/block/System Menu Block
+parameters:
+ sourceLink: 'compass:system_menu_block'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: compass_main_menu
+      entity_type: block
+      view_mode: default
+      langcode: ''
+      check_access: true
+      block_content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}

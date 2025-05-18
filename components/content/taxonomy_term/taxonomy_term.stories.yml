@@ -1,0 +1,13 @@
+title: compass/components/content/Taxonomy Term
+parameters:
+  sourceLink: 'compass:taxonomy_term'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      entity_type: taxonomy_term
+      view_mode: default
+      langcode: ''
+      check_access: true
+      term_content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}

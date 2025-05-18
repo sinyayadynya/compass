@@ -1,0 +1,10 @@
+[data-component-id="compass:system_branding_block"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:system_branding_block"] .site-logo img {
+    @apply max-w-96;
+}
+[data-component-id="compass:system_branding_block"] .site-logo,
+[data-component-id="compass:system_branding_block"] .site-name {
+    @apply inline-block;
+}

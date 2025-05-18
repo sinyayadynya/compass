@@ -1,0 +1,23 @@
+/**
+ * @file
+ * Visual styles for links.
+ * @see css/components/links.css
+ */
+
+[data-component-id="compass:links"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:links"] ul.inline,
+[data-component-id="compass:links"] ul.links.inline {
+    @apply inline-block pl-0;
+}
+[dir="rtl"] [data-component-id="compass:links"] ul.inline,
+[dir="rtl"] [data-component-id="compass:links"] ul.links.inline {
+    @apply pr-0 pl-4;
+}
+[data-component-id="compass:links"] ul.inline li {
+    @apply inline-block py-0 px-2 list-none;
+}
+[data-component-id="compass:links"] ul.links a.is-active {
+    @apply text-gray-900;
+}

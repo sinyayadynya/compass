@@ -1,0 +1,43 @@
+title: compass/components/content/Mark
+parameters:
+  sourceLink: 'compass:mark'
+argTypes:
+  status:
+    control: inline-radio
+    options:
+      MARK_NEW: 1
+      MARK_UPDATED: 2
+      MARK_READ: 0
+stories:
+  - name: 1. Mock mark
+    args:
+      status: 1
+      logged_in: true
+  - name: 2. Node mark
+    args:
+      user_id: 1
+      node_id: 1
+      view_mode: default
+      langcode: ''
+      check_access: true
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $node = $manager->getStorage('node')->load($node_id);
+        $mark = node_mark($node_id, $node->getChangedTime());
+        $label = \Drupal::service('renderer')->render(
+          $tweak::drupalField('title', 'node', $node_id, $view_mode, $langcode, $check_access)
+        );
+        return implode('?separator?', [$logged_in, $mark, $label]);
+        " %}
+        {% set result = code|php|split('?separator?') %}
+        {% set logged_in = result[0] + 0 %}
+        {% set status = result[1] + 0 %}
+        {% include 'compass:mark' %}
+        {{ result[2]|raw }}

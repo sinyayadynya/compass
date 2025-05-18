@@ -1,0 +1,35 @@
+title: compass/components/form/Radios
+parameters:
+  sourceLink: 'compass:radios'
+stories:
+  - name: 1. Add Form
+    args:
+      entity_type: node
+      bundle: my_article
+      field_name: field_my_list_number
+      view_mode: default
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, NULL, $view_mode, [
+          'type' => $bundle,
+        ], $check_access)[$field_name]['widget'];
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Edit Form
+    args:
+      entity_type: node
+      entity_id: 1
+      field_name: field_my_list_number
+      view_mode: default
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [
+        ], $check_access)[$field_name]['widget'];
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

@@ -1,0 +1,30 @@
+/**
+ * @file
+ * Caption filter: default styling for displaying image captions.
+ * @see core/themes/stable9/css/filter/filter.caption.css
+ */
+
+[data-component-id="compass:filter_caption"] {
+  /* Add your styles here */
+}
+/**
+ * Essentials, based on http://stackoverflow.com/a/13363408.
+ */
+[data-component-id="compass:filter_caption"].caption {
+    @apply table;
+}
+[data-component-id="compass:filter_caption"].caption > * {
+    @apply block max-w-full;
+}
+[data-component-id="compass:filter_caption"].caption > figcaption {
+    @apply table-caption max-w-2 caption-bottom;
+}
+/**
+ * While editing and whenever the caption is empty, show a placeholder.
+ *
+ * Based on http://codepen.io/flesler/pen/AEIFc.
+ */
+[data-component-id="compass:filter_caption"].caption > figcaption[contenteditable=true]:empty::before {
+    content: attr(data-placeholder);
+    @apply italic;
+}

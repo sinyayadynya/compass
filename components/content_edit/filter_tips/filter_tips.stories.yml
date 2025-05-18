@@ -1,0 +1,67 @@
+title: compass/components/content_edit/Filter Tips
+parameters:
+  sourceLink: 'compass:filter_tips'
+argTypes:
+  format:
+    control: select
+    options:
+      BASIC_HTML: 'basic_html'
+      RESTRICTED_HTML: 'restricted_html'
+      FULL_HTML: 'full_html'
+      PLAIN_TEXT: 'plain_text'
+stories:
+  - name: 1. Add Form
+    args:
+      format: basic_html
+      entity_type: node
+      bundle: my_article
+      field_name: field_my_body
+      view_mode: default
+      check_access: false
+      user_id: 1
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, NULL, $view_mode, [
+          'type' => $bundle,
+        ], $check_access)[$field_name]['widget'][0]['format']['guidelines'];
+        $tips = isset($field[$format]['#format']) ? [
+          '#theme' => 'filter_tips',
+          '#tips' => _filter_tips($field[$format]['#format']->id(), FALSE),
+        ] : ['#markup' => 'The <em>' . $format . '</em> format is not enabled.'];
+        return \Drupal::service('renderer')->render($tips);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Edit Form
+    args:
+      format: basic_html
+      entity_type: node
+      entity_id: 1
+      field_name: field_my_body
+      view_mode: default
+      check_access: false
+      user_id: 1
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [
+        ], $check_access)[$field_name]['widget'][0]['format']['guidelines'];
+        $tips = isset($field[$format]['#format']) ? [
+          '#theme' => 'filter_tips',
+          '#tips' => _filter_tips($field[$format]['#format']->id(), FALSE),
+        ] : ['#markup' => 'The <em>' . $format . '</em> format is not enabled.'];
+        return \Drupal::service('renderer')->render($tips);
+        " %}
+        {{ code|php|raw }}

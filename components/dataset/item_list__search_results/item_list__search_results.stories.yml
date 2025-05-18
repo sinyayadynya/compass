@@ -1,0 +1,26 @@
+title: compass/components/dataset/Item List  Search Results
+parameters:
+  sourceLink: 'compass:item_list__search_results'
+stories:
+  - name: 1. Page
+    args:
+      search_plugin: node
+      search_keys: 'neo quis'
+      content: |
+        {% set pattern = "%
+        <!-- BEGIN OUTPUT from 'themes/compass/templates/dataset/item-list--search-results.html.twig' -->
+        (.*)
+        <!-- END OUTPUT from 'themes/compass/templates/dataset/item-list--search-results.html.twig' -->
+        %msU" %}
+        {% set code = "
+        $base_url = \\\Drupal\\\Core\\\Url::fromRoute('<front>')->toString();
+        $url = $base_url . 'search/' . $search_plugin . '?keys=' . $search_keys;
+        $markup = \Drupal::httpClient()->get($url)->getBody()->__toString();
+        preg_match($pattern, $markup, $matches);
+        return $matches[1] ?? 'No regex match. Is the Twig debug enabled and route is accessible by anon user and has search results?';
+        " %}
+        {{ code|php|raw }}
+        {% set mock_library_load %}
+          {% include 'compass:item_list' %}
+          {% include 'compass:search_result' %}
+        {% endset %}

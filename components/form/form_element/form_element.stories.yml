@@ -1,0 +1,44 @@
+title: compass/components/form/Form Element
+parameters:
+  sourceLink: 'compass:form_element'
+stories:
+  - name: 1. Add Form
+    args:
+      entity_type: node
+      bundle: my_article
+      field_name: title
+      view_mode: default
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, NULL, $view_mode, [
+          'type' => $bundle,
+        ], $check_access)[$field_name]['widget'][0];
+        $field['#theme_wrappers'] = [];
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Edit Form
+    args:
+      entity_type: node
+      entity_id: 1
+      field_name: title
+      view_mode: default
+      check_access: false
+      user_id: 1
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [
+        ], $check_access)[$field_name]['widget'][0];
+        $field['#theme_wrappers'] = [];
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

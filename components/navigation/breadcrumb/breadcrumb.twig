@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% block content %}
+	<div {{ attributes.addClass('mx-auto max-w-7xl px-6 lg:px-8') }}>
+		{% if breadcrumb %}
+			<nav class="breadcrumb my-4" role="navigation" aria-labelledby="system-breadcrumb">
+				<h2 id="system-breadcrumb" class="hidden">
+					{{ 'Breadcrumb'|t }}
+				</h2>
+				<ol class="flex items-center gap-x-2">
+					{% for item in breadcrumb %}
+						<li>
+							<div class="flex items-center">
+								{% if item.url %}
+									{% if loop.index == 1 %}
+										<a href="{{ item.url }}" class="text-gray-400 hover:text-gray-500">
+											<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" fill="currentColor" class="w-4 h-4 shrink-0">
+												<path d="M8.543 2.232a.75.75 0 0 0-1.085 0l-5.25 5.5A.75.75 0 0 0 2.75 9H4v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V9h1.25a.75.75 0 0 0 .543-1.268l-5.25-5.5Z"/>
+											</svg>
+										</a>
+									{% else %}
+										<svg class="h-5 w-5 shrink-0 text-gray-300" fill="currentColor" viewbox="0 0 20 20" aria-hidden="true">
+											<path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+										</svg>
+										<a href="{{ item.url }}" class="ml-2 text-xs font-medium text-gray-400 hover:text-gray-600">
+											{{ item.text }}
+										</a>
+									{% endif %}
+								{% else %}
+									<svg class="h-5 w-5 shrink-0 text-gray-300" fill="currentColor" viewbox="0 0 20 20" aria-hidden="true">
+										<path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+									</svg>
+									<span class="ml-2 text-xs font-medium text-gray-400">
+										{{ item.text }}
+									</span>
+								{% endif %}
+							</div>
+						</li>
+					{% endfor %}
+				</ol>
+			</nav>
+		{% endif %}
+	</div>
+{% endblock %}

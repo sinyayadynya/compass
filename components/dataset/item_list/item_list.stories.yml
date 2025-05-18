@@ -1,0 +1,34 @@
+title: compass/components/dataset/Item List
+parameters:
+  sourceLink: 'compass:item_list'
+argTypes:
+  list_type:
+    control: inline-radio
+    options:
+      UL: 'ul'
+      OL: 'ol'
+      COMMA_SEP: 'comma-list'
+stories:
+  - name: 1. Default
+    args:
+      list_type: 'ul'
+      items_number: 3
+      title: My Title
+      item_text: 'My item'
+      empty: 'No items found'
+      context:
+        list_style: 'my-list-style'
+      content: |
+        {% if list_type == 'comma-list' %}
+          {% set context = {list_style: 'comma-list'} %}
+        {% endif %}
+        {% set wrapper_attributes = create_attribute() %}
+        {% set items = [] %}
+        {% if items_number %}
+          {% for item in range(1, items_number) %}
+            {% set items = items|merge([
+              {value: item_text ~ ' ' ~ item, attributes: create_attribute()}
+            ]) %}
+          {% endfor %}
+        {% endif %}
+        {% include 'compass:item_list' %}

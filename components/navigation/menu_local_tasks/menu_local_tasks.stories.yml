@@ -1,0 +1,79 @@
+title: compass/components/navigation/Menu Local Tasks
+parameters:
+ sourceLink: 'compass:menu_local_tasks'
+stories:
+  - name: 1. Mock Tasks
+    args:
+      primary_tab_text: 'My Primary Tab'
+      secondary_tab_text: 'My Secondary Tab'
+      content: |
+        {% set code = "
+        function system_local_tasks_alter(&$local_tasks) {
+          $local_tasks['system.tab_0'] = [
+            'title' => '" ~ primary_tab_text ~ ' (parent)' ~ "',
+            'base_route' => 'cl_server.render',
+            'route_name' => 'cl_server.render',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'weight' => 0,
+          ];
+          $local_tasks['system.tab_1'] = [
+            'title' => '" ~ primary_tab_text ~ '-1' ~  "',
+            'base_route' => 'cl_server.render',
+            'route_name' => 'contact.site_page',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'weight' => 1,
+          ];
+          $local_tasks['system.tab_2'] = [
+            'title' => '" ~ primary_tab_text ~ '-2' ~  "',
+            'base_route' => 'cl_server.render',
+            'route_name' => 'entity.user.canonical',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'route_parameters' => ['user' => 1],
+            'weight' => 2,
+          ];
+          $local_tasks['system.sub_tab_1'] = [
+            'title' => '" ~ secondary_tab_text ~ '-1' ~  "',
+            'parent_id' => 'system.tab_0',
+            'route_name' => 'contact.site_page',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'weight' => 1,
+          ];
+          $local_tasks['system.sub_tab_2'] = [
+            'title' => '" ~ secondary_tab_text ~ '-2' ~  "',
+            'parent_id' => 'system.tab_0',
+            'route_name' => 'entity.user.canonical',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalTaskDefault',
+            'options' => [],
+            'route_parameters' => ['user' => 1],
+            'weight' => 2,
+          ];
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $block = $tweak::drupalBlock('local_tasks_block', $configuration = [], $wrapper = FALSE);
+        return \Drupal::service('renderer')->render($block);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Rendered on route
+    args:
+      route: 'view.my_frontpage.page_1'
+      content: |
+        {% set pattern = "%
+        <!-- BEGIN OUTPUT from 'themes/compass/templates/navigation/menu-local-tasks.html.twig' -->
+        (.*)
+        <!-- END OUTPUT from 'themes/compass/templates/navigation/menu-local-tasks.html.twig' -->
+        %ms" %}
+        {% set code = "
+        $url = \\\Drupal\\\Core\\\Url::fromRoute($route, [], ['absolute' => TRUE])->toString();
+        $markup = \Drupal::httpClient()->get($url)->getBody()->__toString();
+        preg_match($pattern, $markup, $matches);
+        return $matches[1] ?? 'No regex match. Is the Twig debug enabled and route is accessible by anon user and has tasks?';
+        " %}
+        {{ code|php|raw }}
+        {% set mock_load_libraries %}
+          {% include 'compass:block' %}
+          {% include 'compass:menu_local_task' %}
+        {% endset %}

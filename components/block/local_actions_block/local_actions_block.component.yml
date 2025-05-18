@@ -1,0 +1,13 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Local Actions Block
+status: stable
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+slots:
+  actions_block_content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

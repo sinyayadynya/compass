@@ -1,0 +1,41 @@
+title: compass/components/navigation/Links
+parameters:
+ sourceLink: 'compass:links'
+argTypes:
+  heading_level:
+    control: inline-radio
+    options:
+      H1: 'h1'
+      DEFAULT: ''
+      H3: 'h3'
+      H4: 'h4'
+      H5: 'h5'
+      H6: 'h6'
+  inline_links:
+    control: check
+    options:
+      Yes: 'inline'
+stories:
+  - name: 1. Multiple items
+    args:
+      heading_text: 'My Links (optional)'
+      heading_level: ''
+      inline_links: ''
+      content: |
+        {% set attributes = create_attribute({'class': ['links', inline_links ? 'inline']}) %}
+        {% set heading = {text: heading_text, level: heading_level} %}
+        {% set links = [
+          {
+            text: 'First text only fallback',
+            link: link('First Link', (url('<front>')|render ~ ''), []),
+          },
+          {
+            text: 'Second text only fallback with text attributes',
+            text_attributes: create_attribute({style: 'color:grey;cursor:not-allowed'}),
+          },
+          {
+            text: 'Third text only fallback',
+            link: link('Third Link', (url('<front>')|render ~ ''), []),
+          },
+        ] %}
+        {% include 'compass:links' %}

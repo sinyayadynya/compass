@@ -1,0 +1,9 @@
+/**
+ * @file
+ * Styles for system messages.
+ * @see css/components/messages.css
+ */
+
+[data-component-id="compass:status_messages"] {
+  /* Add your styles here and enable in main.scss */
+}

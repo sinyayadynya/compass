@@ -1,0 +1,28 @@
+/**
+ * @file
+ * Visual styles for fields.
+ * @see css/components/field.css
+ */
+
+[data-component-id="compass:field__training_offers"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:field_stripped"] .field__label {
+    @apply font-semibold;
+}
+[data-component-id="compass:field_stripped"] .field--label-inline .field__label,
+.field--label-inline .field__items {
+    @apply float-left;
+}
+[data-component-id="compass:field_stripped"] .field--label-inline .field__label,
+[data-component-id="compass:field_stripped"] .field--label-inline > .field__item,
+[data-component-id="compass:field_stripped"] .field--label-inline .field__items {
+    @apply pr-2;
+}
+[dir="rtl"] [data-component-id="compass:field_stripped"] .field--label-inline .field__label,
+[dir="rtl"] [data-component-id="compass:field_stripped"] .field--label-inline .field__items {
+    @apply pr-0 pl-2;
+}
+[data-component-id="compass:field_stripped"] .field--label-inline .field__label::after {
+  content: ":";
+}

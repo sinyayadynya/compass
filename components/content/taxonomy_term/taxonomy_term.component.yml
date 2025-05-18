@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Taxonomy Term
+status: stable
+props:
+  type: object
+  properties:
+    content:
+      type: array
+      title: Content
+    name:
+      type: array
+      title: Name
+    url:
+      type: string
+      title: Url
+    term:
+      type: object
+      title: Term
+    page:
+      type: boolean
+      title: Page
+    view_mode:
+      type: string
+      title: View Mode
+slots:
+  term_content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

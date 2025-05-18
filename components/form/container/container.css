@@ -1,0 +1,25 @@
+/**
+ * @file
+ * Inline items.
+ * @see css/components/container-inline.css
+ */
+
+[data-component-id="compass:container"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:container"] .container-inline label::after,
+[data-component-id="compass:container"] .container-inline .label::after {
+  content: ":";
+}
+[data-component-id="compass:container"] .form-type-radios .container-inline label::after,
+[data-component-id="compass:container"] .form-type-checkboxes .container-inline label::after {
+  content: "";
+}
+[data-component-id="compass:container"] .form-type-radios .container-inline .form-type-radio,
+[data-component-id="compass:container"] .form-type-checkboxes .container-inline .form-type-checkbox {
+    @apply my-0 mx-4;
+}
+[data-component-id="compass:container"] .container-inline .form-actions,
+[data-component-id="compass:container"] .container-inline.form-actions {
+    @apply my-0;
+}

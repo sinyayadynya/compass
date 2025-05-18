@@ -1,0 +1,27 @@
+title: compass/components/views/Views View Summary
+parameters:
+  sourceLink: 'compass:views_view_summary'
+argTypes:
+  format:
+    control: radio
+    options:
+      DEFAULT_SUMMARY: default_summary
+      UNFORMATTED_SUMMARY: unformatted_summary
+stories:
+  - name: 1. Default
+    args:
+      view_id: my_frontpage
+      display_id: page_2
+      format: default_summary
+      content: |
+        {% set code = "
+        $view = \Drupal::service('entity_type.manager')->getStorage('view')
+          ->load($view_id)->getExecutable();
+        $view->setDisplay($display_id);
+        $arguments = $view->display_handler->options['arguments'];
+        $arguments['title']['summary']['format'] = $format;
+        $view->display_handler->overrideOption('arguments', $arguments);
+        $view->preview();
+        return \Drupal::service('renderer')->render($view->render());
+        " %}
+        {{ code|php|raw }}

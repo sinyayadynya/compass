@@ -1,0 +1,16 @@
+title: compass/components/navigation/Vertical Tabs
+parameters:
+ sourceLink: 'compass:vertical_tabs'
+stories:
+  - name: 1. Default
+    args:
+      form: '\Drupal\user\AccountSettingsForm'
+      field_name: email
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalForm($form)[$field_name];
+        unset($field['#title']);
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

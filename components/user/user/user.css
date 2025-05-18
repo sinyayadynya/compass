@@ -1,0 +1,12 @@
+/**
+ * @file
+ * Theme styling for user profile.
+ * @see css/components/user.css
+ */
+
+[data-component-id="compass:user"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:user"] .label {
+    @apply italic;
+}

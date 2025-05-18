@@ -1,0 +1,33 @@
+/**
+ * @file
+ * Visual styles for item list.
+ * @see css/components/item-list.css
+ */
+
+[data-component-id="compass:item_list"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:item_list"] .item-list .title {
+    @apply font-semibold;
+}
+[data-component-id="compass:item_list"] .item-list ul {
+    @apply mx-0 mt-0 mb-3 p-0;
+}
+[data-component-id="compass:item_list"] .item-list li {
+  @apply mt-0 mr-0 mb-1 ml-6;
+}
+[dir="rtl"] [data-component-id="compass:item_list"] .item-list li {
+    @apply mt-0 mr-6 mb-1 ml-0;
+}
+/**
+ * Comma separated lists.
+ */
+[data-component-id="compass:item_list"] .item-list--comma-list {
+    @apply inline-block;
+}
+[data-component-id="compass:item_list"] .item-list--comma-list .item-list__comma-list,
+[data-component-id="compass:item_list"] .item-list__comma-list li,
+[dir="rtl"] [data-component-id="compass:item_list"] .item-list--comma-list .item-list__comma-list,
+[dir="rtl"] [data-component-id="compass:item_list"] .item-list__comma-list li {
+    @apply m-0;
+}

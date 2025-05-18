@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Visual styles for table drag.
+ * @see css/components/tabledrag.css
+ */
+
+[data-component-id="compass:table"] tr.drag {
+    @apply bg-amber-50;
+}
+[data-component-id="compass:table"] tr.drag-previous {
+    @apply bg-lime-50;
+}
+body [data-component-id="compass:table"] div.tabledrag-changed-warning {
+    @apply mb-2;
+}

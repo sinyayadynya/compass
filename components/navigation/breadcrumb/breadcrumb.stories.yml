@@ -1,0 +1,63 @@
+title: compass/components/navigation/Breadcrumb
+parameters:
+ sourceLink: 'compass:breadcrumb'
+stories:
+  - name: 1. Default
+    args:
+      breadcrumb_number: 5
+      breadcrumb_text: 'My item'
+      content: |
+        {% set code = "
+        $url = \\\Drupal\\\Core\\\Url::fromRoute('<front>');
+        $breadcrumb = new \\\Drupal\\\Core\\\Breadcrumb\\\Breadcrumb();
+        foreach ($breadcrumb_number ? range(1, $breadcrumb_number) : [] as $number) {
+          $breadcrumb->addLink(new \\\Drupal\\\Core\\\Link($breadcrumb_text . '-' . $number, $url));
+        }
+        return \Drupal::service('renderer')->render($breadcrumb->toRenderable());
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Twig sdc
+    args:
+      breadcrumb_number: 5
+      breadcrumb_text: 'My item'
+      no_link_item: false
+      content: |
+        {% set breadcrumb = no_link_item ? {no_link_item:{
+            text: breadcrumb_text ~ '- no link fallback',
+          }} : [] %}
+        {% if breadcrumb_number > 0 %}
+          {% for key, value in range(1, breadcrumb_number) %}
+            {% set breadcrumb = breadcrumb|merge({('item' ~ key):{
+              text: breadcrumb_text ~ '-' ~ value,
+              url: link(key, (url('<front>')|render ~ ''), [])['#url'],
+            }}) %}
+          {% endfor %}
+        {% endif %}
+        {% include 'compass:breadcrumb' %}
+  - name: 3. PHP sdc
+    args:
+      breadcrumb_number: 5
+      breadcrumb_text: 'My item'
+      no_link_item: false
+      content: |
+        {% set code = "
+        $url = \\\Drupal\\\Core\\\Url::fromRoute('<front>')->toString();
+        $breadcrumb = $no_link_item ? [[
+          'text' => $breadcrumb_text . '-no  link fallback',
+        ]] : [];
+        foreach ($breadcrumb_number ? range(1, $breadcrumb_number) : [] as $number) {
+          $breadcrumb[] = [
+            'text' => $breadcrumb_text . '-' . $number,
+            'url' => $url,
+          ];
+        }
+        $array = [
+          '#type' => 'component',
+          '#component' => 'compass:breadcrumb',
+          '#props' => [
+            'breadcrumb' => $breadcrumb,
+          ],
+        ];
+        return \Drupal::service('renderer')->render($array);
+        " %}
+        {{ code|php|raw }}

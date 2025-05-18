@@ -1,0 +1,20 @@
+title: compass/components/content_edit/Node Add List
+parameters:
+  sourceLink: 'compass:node_add_list'
+stories:
+  - name: 1. Default
+    args:
+      user_id: 1
+      content: |
+        {% set code = "
+        $manager = \Drupal::service('entity_type.manager');
+        $logged_in = 0;
+        if ($user_id) {
+          $user = $manager->getStorage('user')->load($user_id);
+          $logged_in = user_login_finalize($user) ? 0 : 1;
+        }
+        $controller = '\\\Drupal\\\\node\\\Controller\\\NodeController';
+        $array = $controller::create(\Drupal::getContainer())->addPage();
+        return \Drupal::service('renderer')->render($array);
+        " %}
+        {{ code|php|raw }}

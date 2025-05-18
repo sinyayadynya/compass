@@ -1,0 +1,17 @@
+title: compass/components/views/Views Mini Pager
+parameters:
+  sourceLink: 'compass:views_mini_pager'
+stories:
+  - name: 1. Default
+    args:
+      view_id: my_frontpage
+      display_id: page_1
+      content: |
+        {% set code = "
+        $views = '\\Drupal\\views\\Views';
+        $view = $views::getView($view_id);
+        $view->setDisplay($display_id);
+        $view->preview();
+        return \Drupal::service('renderer')->render($view->renderPager([]));
+        " %}
+        {{ code|php|raw }}

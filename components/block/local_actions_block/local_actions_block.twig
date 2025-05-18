@@ -1,0 +1,16 @@
+{% extends "compass:block" %}
+{#
+/**
+ * @file
+ * Theme override for local actions (primary admin actions.)
+ */
+#}
+{% block content %}
+  {% block actions_block_content %}
+    {% if content %}
+      <nav class="action-links *:inlineblock" data-component-id="compass:local_actions_block">
+        {{ content }}
+      </nav>
+    {% endif %}
+  {% endblock %}
+{% endblock %}

@@ -1,0 +1,15 @@
+title: compass/components/layout/Html Login
+parameters:
+  sourceLink: 'compass:html-login'
+stories:
+  - name: 1. Rendered on path
+    args:
+      path: '/'
+      html_content: |
+        {% set base_url = url('<front>')|render|trim('/') %}
+        {% set pattern = ['@( href=")(/)@', '@( src=")(/)@'] %}
+        {% set code = "
+        $markup = \Drupal::httpClient()->get($base_url . $path)->getBody()->__toString();
+        return preg_replace($pattern, '$1' . $base_url . '/', $markup);
+        " %}
+        {{ code|php|raw }}

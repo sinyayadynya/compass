@@ -1,0 +1,11 @@
+title: compass/components/misc/Progress Bar
+parameters:
+  sourceLink: 'compass:progress_bar'
+stories:
+  - name: 1. Default
+    args:
+      label: 'My label'
+      percent: 50
+      message: 'My message'
+      content: |
+        {% include 'compass:progress_bar' %}

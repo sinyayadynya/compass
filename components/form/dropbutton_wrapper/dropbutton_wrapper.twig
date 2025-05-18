@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for a dropbutton wrapper.
+ *
+ * Available variables:
+ * - children: Contains the child elements of the dropbutton menu.
+ *
+ * @see template_preprocess()
+ */
+#}
+{% block content %}
+  {% if children %}
+    <div {{ attributes }}>
+    {% set attributes = attributes.removeAttribute('data-component-id') %}
+        {% apply spaceless %}
+          <div class="dropbutton-wrapper" data-drupal-ajax-container>
+            <div class="dropbutton-widget">
+              {{ children }}
+            </div>
+          </div>
+        {% endapply %}
+    </div>
+  {% endif %}
+{% endblock %}

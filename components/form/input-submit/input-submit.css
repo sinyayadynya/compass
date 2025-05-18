@@ -1,0 +1,24 @@
+[data-component-id="compass:input-submit"] {
+  /* Add your styles here */
+  @apply bg-blue-950 hover:bg-blue-950/70 text-white;
+}
+
+[data-component-id="compass:input-submit"].button--primary {
+  @apply bg-blue-950 hover:bg-blue-950/70 text-white;
+}
+
+[data-component-id="compass:input-submit"].button--danger {
+  @apply bg-red-50 text-red-600 hover:bg-red-100;
+}
+
+[data-component-id="compass:input-submit"].is-disabled {
+  @apply cursor-not-allowed bg-gray-50 text-gray-500 hover:bg-gray-50;
+}
+
+/* .webform-button--submit {
+  @apply bg-blue-950 hover:bg-blue-950/70 text-white;
+} */
+
+a.button {
+  @apply text-sm font-semibold leading-6 text-gray-900;
+}

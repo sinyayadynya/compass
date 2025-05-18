@@ -1,0 +1,14 @@
+title: compass/components/field/Formatter Link Separate
+parameters:
+  sourceLink: 'compass:formatter_link_separate'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_link_separate
+      view_mode: default # "Separate link text and URL"
+      langcode: ''
+      check_access: true
+      content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}

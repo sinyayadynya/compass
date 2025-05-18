@@ -1,0 +1,6 @@
+[data-component-id="compass:local_actions_block"] {
+  /* Add your styles here and enable in main.scss */
+}
+[data-component-id="compass:local_actions_block"] ul {
+    @apply inline-block;
+}

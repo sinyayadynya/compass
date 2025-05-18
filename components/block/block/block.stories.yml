@@ -1,0 +1,27 @@
+title: compass/components/block/System block.
+parameters:
+ sourceLink: 'compass:block'
+stories:
+  - name: 1. Default
+    args:
+      block_plugin_id: system_breadcrumb_block
+      block_label: 'My Label'
+      label_display: false
+      label_prefix: ''
+      label_suffix: ''
+      block_content: |
+        {% set code = "
+        function compass_preprocess_block(&$variables) {
+          $variables['title_prefix'] = ['#markup' => '" ~ label_prefix ~ "'];
+          $variables['title_suffix'] = ['#markup' => '" ~ label_suffix ~ "'];
+          // $variables['in_preview'] = TRUE;
+          // $variables['title_attributes']['class'][] = 'my-class';
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $block = $tweak::drupalBlock($block_plugin_id, $configuration = [
+          'label' => $block_label,
+          'label_display' => $label_display ? 'visible' : '',
+        ], $wrapper = TRUE);
+        return \Drupal::service('renderer')->render($block);
+        " %}
+        {{ code|php|raw }}

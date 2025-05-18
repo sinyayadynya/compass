@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override for a marker for new or updated content.
+ *
+ * Available variables:
+ * - status: Number representing the marker status to display. Use the constants
+ *   below for comparison:
+ *   - MARK_NEW
+ *   - MARK_UPDATED
+ *   - MARK_READ
+ */
+#}
+{% block content %}
+  {% if logged_in %}
+    {% if status is constant('MARK_NEW') %}
+      <span class="marker marker--new" data-component-id="{{ attributes['data-component-id'] }}">
+        {{ 'New'|t }}
+      </span>
+    {% elseif status is constant('MARK_UPDATED') %}
+      <span class="marker marker--updated" data-component-id="{{ attributes['data-component-id'] }}">
+        {{ 'Updated'|t }}
+      </span>
+    {% elseif status is constant('MARK_READ') %}
+      <span class="marker marker--read" data-component-id="{{ attributes['data-component-id'] }}">
+        {{ '> 30 days'|t }}
+      </span>
+    {% endif %}
+  {% endif %}
+  {% set attributes = attributes.removeAttribute('data-component-id') %}
+{% endblock %}

@@ -1,0 +1,7 @@
+[data-component-id="compass:search_form_block"] {
+  /* Add your styles here and enable in main.scss */
+}
+[data-component-id="compass:search_form_block"] .form-item,
+[data-component-id="compass:search_form_block"] .form-actions {
+    @apply inline-block;
+}

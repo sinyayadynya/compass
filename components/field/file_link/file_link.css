@@ -1,0 +1,61 @@
+/**
+ * @file
+ * Default style for file module.
+ * @see css/components/file.css
+ */
+
+/* File icons. */
+
+[data-component-id="compass:file_link"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:file_link"] .file {
+    @apply inline-block min-h-4 pl-5 bg-no-repeat bg-left;
+}
+[dir="rtl"] [data-component-id="compass:file_link"] .file {
+    @apply pr-5 bg-right;
+    padding-left: inherit;
+}
+[data-component-id="compass:file_link"] .file--general,
+[data-component-id="compass:file_link"] .file--application-octet-stream {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/application-octet-stream.svg);
+}
+[data-component-id="compass:file_link"] .file--package-x-generic {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/package-x-generic.svg);
+}
+[data-component-id="compass:file_link"] .file--x-office-spreadsheet {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/x-office-spreadsheet.svg);
+}
+[data-component-id="compass:file_link"] .file--x-office-document {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/x-office-document.svg);
+}
+[data-component-id="compass:file_link"] .file--x-office-presentation {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/x-office-presentation.svg);
+}
+[data-component-id="compass:file_link"] .file--text-x-script {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/text-x-script.svg);
+}
+[data-component-id="compass:file_link"] .file--text-html {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/text-html.svg);
+}
+[data-component-id="compass:file_link"] .file--text-plain {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/text-plain.svg);
+}
+[data-component-id="compass:file_link"] .file--application-pdf {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/application-pdf.svg);
+}
+[data-component-id="compass:file_link"] .file--application-x-executable {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/application-x-executable.svg);
+}
+[data-component-id="compass:file_link"] .file--audio {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/audio-x-generic.svg);
+}
+[data-component-id="compass:file_link"] .file--video {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/video-x-generic.svg);
+}
+[data-component-id="compass:file_link"] .file--text {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/text-x-generic.svg);
+}
+[data-component-id="compass:file_link"] .file--image {
+  background-image: url(/themes/custom/compass/components/field/file_link/images/icons/image-x-generic.svg);
+}

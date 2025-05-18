@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>favicon</title>
+    <g id="favicon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M18,5 C18,2.23857625 15.7614237,0 13,0 L7,0 C4.23857625,0 2,2.23857625 2,5 L2,18.927 C2,19.3109736 2.22001944,19.6609894 2.56593403,19.8276593 C2.91184863,19.9943292 3.32264744,19.9482156 3.623,19.709 L7.307,16.779 C8.01476452,16.2158179 8.8925086,15.9091362 9.797,15.909 L13,15.909 C15.7614237,15.909 18,13.6704237 18,10.909 L18,5 Z" id="Path" fill="#314158" fill-rule="nonzero"></path>
+    </g>
+</svg>

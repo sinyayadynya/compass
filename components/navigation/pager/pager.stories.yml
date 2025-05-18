@@ -1,0 +1,52 @@
+title: compass/components/navigation/Pager
+parameters:
+ sourceLink: 'compass:pager'
+stories:
+  - name: 1. Mock Pager
+    args:
+      page_number: 0
+      total_pages: 50
+      limit_divider: 2
+      first_text: 'My first'
+      previous_text: 'My previous'
+      next_text: 'My next'
+      last_text: 'My last'
+      content: |
+        {% set code = "
+        \Drupal::request()->query->set('page', $page_number);
+        $pages_content = [];
+        foreach (range(0, 50) as $num) {
+          $pages_content[] = $num;
+        }
+        $current_page = \Drupal::service('pager.manager')
+          ->createPager(count($pages_content), $limit_divider)
+          ->getCurrentPage();
+        $chunks = array_chunk($pages_content, $limit_divider);
+        $chunk = $pages_content[$current_page];
+        $pager = [
+          '#type' => 'pager',
+          '#tags' => [
+            0 => $first_text,
+            1 => $previous_text,
+            3 => $next_text,
+            4 => $last_text,
+          ],
+        ];
+        return \Drupal::service('renderer')->render($pager);
+        " %}
+        {{ code|php|raw }}
+  - name: 2. Views Pager
+    args:
+      page_number: 0
+      view_id: my_frontpage
+      display_id: 'page_1'
+      content: |
+        {% set code = "
+        $views = '\\Drupal\\views\\Views';
+        $view = $views::getView($view_id);
+        $view->setDisplay($display_id);
+        $view->getRequest()->query->set('page', $page_number);
+        $view->execute();
+        return \Drupal::service('renderer')->render($view->renderPager([]));
+        " %}
+        {{ code|php|raw }}

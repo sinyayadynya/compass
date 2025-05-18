@@ -1,0 +1,3 @@
+table.sticky-header {
+    @apply border border-dotted border-gray-600;
+}

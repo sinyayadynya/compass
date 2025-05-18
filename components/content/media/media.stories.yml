@@ -1,0 +1,63 @@
+title: compass/components/content/Media
+parameters:
+  sourceLink: 'compass:media'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      entity_type: media
+      view_mode: default
+      langcode: ''
+      check_access: false
+      media_content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 2. Entity Field Document
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_media_document
+      view_mode: default
+      langcode: ''
+      check_access: false
+      media_content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 3. Entity Field Image
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_media_image
+      view_mode: default
+      langcode: ''
+      check_access: false
+      media_content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 4. Entity Field Audio
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_media_audio
+      view_mode: default
+      langcode: ''
+      check_access: false
+      media_content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 5. Entity Field Video
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_media_video
+      view_mode: default
+      langcode: ''
+      check_access: false
+      media_content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}
+  - name: 6. Entity Field Video Remote
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_media_video_remote
+      view_mode: default
+      langcode: ''
+      check_access: false
+      media_content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}

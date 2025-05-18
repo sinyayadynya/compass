@@ -1,0 +1,18 @@
+{% stories node with { title: 'compass/components/content/Real Estate Listing' } %}
+
+{% story default with {
+    name: '1. Default',
+    args: {
+      entity_id: 1,
+      entity_type: 'node',
+      view_mode: 'default',
+      langcode: '',
+      check_access: true,
+      node_content: drupal_entity(entity_type, entity_id, view_mode, langcode, check_access)
+    }
+  } %}
+{# Here, you can include the Twig for the "default" story. The `args` will be available as variables. #}
+{{ node_content }}
+{% endstory %}
+
+{% endstories %}

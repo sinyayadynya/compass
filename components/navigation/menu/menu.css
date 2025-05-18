@@ -1,0 +1,34 @@
+/**
+ * @file
+ * Visual styles for compass:menu.
+ * @see css/components/menu.css
+ */
+
+[data-component-id="compass:menu"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:menu"] ul.menu {
+  @apply ml-4 p-0 list-none list-outside text-left;
+}
+[dir="rtl"] [data-component-id="compass:menu"] ul.menu {
+    @apply mr-4 ml-0 text-right;
+}
+[data-component-id="compass:menu"] .menu-item--expanded {
+    @apply list-[circle] list-image-[url(/themes/custom/compass/components/navigation/menu/images/icons/menu-expanded.svg)];
+}
+[data-component-id="compass:menu"] .menu-item--collapsed {
+    @apply list-disc list-image-[url(/themes/custom/compass/components/navigation/menu/images/icons/menu-collapsed.svg)];
+}
+[data-component-id="compass:menu"] .menu-item--active-trail {
+    @apply list-[square];
+}
+[dir="rtl"] [data-component-id="compass:menu"] .menu-item--collapsed {
+    @apply list-image-[url(/themes/custom/compass/components/navigation/menu/images/icons/menu-collapsed-rtl.svg)];
+
+}
+[data-component-id="compass:menu"] .menu-item {
+    @apply m-0 pt-[0.2rem];
+}
+[data-component-id="compass:menu"] ul.menu a.is-active {
+    @apply text-gray-950;
+}

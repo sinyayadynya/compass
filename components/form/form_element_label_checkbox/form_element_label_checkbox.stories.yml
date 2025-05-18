@@ -1,0 +1,22 @@
+title: compass/components/form/Form Element Label Checkbox
+parameters:
+  sourceLink: 'compass:form_element_label_checkbox'
+argTypes:
+  titleDisplay:
+    control: inline-checkbox
+    options:
+      AFTER: after
+      INVISIBLE: 'invisible'
+      DEFAULT: ''
+stories:
+  - name: 1. Default
+    args:
+      title: 'My Field Title'
+      titleDisplay: ''
+      required: false
+      content: |
+        {% set title_display = titleDisplay %}
+        {% set children %}
+          {% include 'compass:form_element_label' %}
+        {% endset %}
+        {% include 'compass:form' %}

@@ -1,0 +1,30 @@
+title: compass/components/navigation/Menu Local Action
+parameters:
+ sourceLink: 'compass:menu_local_action'
+stories:
+  - name: 1. Default
+    args:
+      route_name: 'contact.site_page'
+      action_text: 'Contact us'
+      button_primary: true
+      content: |
+        {% set code = "
+        function system_menu_local_actions_alter(&$local_actions) {
+          $local_actions['system.example_task_1'] = [
+            'route_name' => '" ~ route_name ~ "',
+            'title' => '" ~ action_text ~ "',
+            'class' => '\\\Drupal\\\Core\\\Menu\\\LocalActionDefault',
+            'options' => [
+              'attributes' => [
+                'class' => ['" ~ button_primary ~ "' ? 'button--primary' : ''],
+              ],
+            ],
+            'appears_on' => ['cl_server.render'],
+            'weight' => 0,
+          ];
+        }
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $action = $tweak::drupalBlock('local_actions_block', $configuration = [], $wrapper = FALSE);
+        return \Drupal::service('renderer')->render($action);
+        " %}
+        {{ code|php|raw }}

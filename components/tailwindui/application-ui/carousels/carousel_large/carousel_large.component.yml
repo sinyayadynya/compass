@@ -1,0 +1,15 @@
+name: Carousel Large
+type: component
+status: stable
+description: >
+  A TailwindCSS / Alpine.js carousel component.
+schema:
+  properties:
+    endpoint:
+      type: string
+    title:
+      type: string
+    header:
+      type: string
+libraries:
+  - compass/carousel_large

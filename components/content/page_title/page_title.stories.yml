@@ -1,0 +1,14 @@
+title: compass/components/content/Page Title
+parameters:
+  sourceLink: 'compass:page_title'
+stories:
+  - name: 1. Mock title
+    args:
+      prefix: '<mark>My prefix</mark>'
+      title: 'My title'
+      suffix: ''
+      content: |
+        {% set title_attributes = create_attribute() %}
+        {% set title_prefix = {'#markup': prefix} %}
+        {% set title_suffix = {'#markup': suffix} %}
+        {% include 'compass:page_title' %}

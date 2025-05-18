@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Visual styles for tabs.
+ * @see css/components/tabs.css
+ */
+
+[data-component-id="compass:menu_local_tasks"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:menu_local_tasks"] .tabs {
+    /* Add your styles here */
+}
+[data-component-id="compass:menu_local_tasks"] ul.tabs {
+    /* Add your styles here */
+}

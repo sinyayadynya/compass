@@ -1,0 +1,58 @@
+/**
+ * @file
+ * Vertical Tabs.
+ * @see web/core/misc/vertical-tabs.css
+ */
+
+[data-component-id="compass:vertical_tabs"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs {
+  @apply my-4 mr-0 ml-60 border border-gray-300;
+}
+[dir="rtl"] [data-component-id="compass:vertical_tabs"] .vertical-tabs {
+  margin-right: 15em;
+  margin-left: 0;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu {
+    @apply float-left w-60 -my-px mr-0 -ml-60 p-0 border-t border-gray-300;
+}
+[dir="rtl"] [data-component-id="compass:vertical_tabs"] .vertical-tabs__menu {
+  float: right;
+  margin-right: -15em;
+  margin-left: 0;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__pane {
+    @apply m-0 p-0;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__pane > summary {
+    @apply hidden;
+}
+/* Layout of each tab. */
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item {
+    @apply border border-gray-300 border-t-0 bg-gray-100;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item a {
+    @apply block py-1 px-1 no-underline;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item a:focus .vertical-tabs__menu-item-title,
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item a:active .vertical-tabs__menu-item-title,
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item a:hover .vertical-tabs__menu-item-title {
+    @apply underline;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item a:hover {
+    @apply outline-dotted;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item.is-selected {
+    @apply border-r-0 bg-white;
+}
+[dir="rtl"] [data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item.is-selected {
+    border-right-width: 1px;
+    border-left-width: 0;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-item-title {
+    @apply text-gray-900;
+}
+[data-component-id="compass:vertical_tabs"] .vertical-tabs__menu-item-summary {
+    @apply block mb-0 leading-none;
+}

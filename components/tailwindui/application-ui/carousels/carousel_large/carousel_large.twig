@@ -1,0 +1,28 @@
+<div x-data="carousel()" x-init="init('{{ endpoint }}')" class="pt-8 pb-24 relative">
+	<div class="mx-auto max-w-(--breakpoint-lg) px-6 lg:px-28">
+		<h2 class="mt-2 text-4xl font-medium tracking-tighter text-gray-800">
+			{{ title }}
+			<span class="text-gray-400">
+				{{ header }}
+			</span>
+		</h2>
+	</div>
+	<div class="scrollbar-hide scroller mt-16 flex snap-x snap-mandatory gap-8 overflow-x-auto px-8" x-ref="carousel" @scroll="onScroll">
+		<template x-for="(slide, index) in slides" :key="index">
+			<div class="relative flex flex-col justify-end aspect-3/4 sm:aspect-4/3 lg:aspect-video w-[90%] max-w-(--breakpoint-lg) max-h-[640px] shrink-0 snap-center rounded-3xl overflow-hidden transition-opacity duration-500 ease-in-out" :class="{'opacity-30': !isActiveSlide(index)}">
+				<img :src="slide.imgSrc" :alt="slide.headline" class="absolute inset-0 h-full w-full object-cover">
+				<div class="absolute inset-0 rounded-3xl bg-linear-to-t from-black from-25% via-black via-0% inset-ring inset-ring-gray-950/10 opacity-60"></div>
+				<div class="relative p-10">
+					<h2 class="relative text-6xl text-white max-w-2xl lg:text-8xl" x-text="slide.slogan"></h2>
+					<p class="mt-6 border-t border-white/20 pt-6 text-base font-medium text-white" x-text="slide.name"></p>
+					<a class="bg-linear-to-r from-darkblue-200 from-28% via-darkblue-300 via-70% to-navy-300 bg-clip-text text-base font-medium text-transparent" :href="slide.url" x-text="slide.headline"></a>
+				</div>
+			</div>
+		</template>
+	</div>
+	<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+		<template x-for="index in dotCount" :key="index">
+			<button @click="scrollToSlide(index - 1)" :class="{'bg-gray-400 w-6': isActiveDot(index - 1), 'bg-gray-400 w-3': !isActiveDot(index - 1)}" class="h-3 rounded-full transition-all duration-300"></button>
+		</template>
+	</div>
+</div>

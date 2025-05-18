@@ -1,0 +1,13 @@
+title: compass/components/user/User
+parameters:
+ sourceLink: 'compass:user'
+stories:
+  - name: 1. User page
+    args:
+      entity_id: 1
+      entity_type: user
+      view_mode: default
+      langcode: ''
+      check_access: true
+      user_content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}

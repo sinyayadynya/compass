@@ -1,0 +1,13 @@
+title: compass/components/form/Container
+parameters:
+  sourceLink: 'compass:container'
+stories:
+  - name: 1. Default
+    args:
+      children: '<mark>My children</mark>'
+      has_parent: false
+      content: |
+        {% set children %}
+          {{ children|raw }}
+        {% endset %}
+        {% include 'compass:container' %}

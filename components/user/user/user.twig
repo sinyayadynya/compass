@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Theme override to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - attributes: HTML attributes for the parent template.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ * @see 'compass:form_element'
+ */
+#}
+{% block user_content %}
+<div data-component-id="{{ attributes['data-component-id'] }}" class="pt-16 pb-24 sm:pt-24 sm:pb-36">
+    {% set attributes = attributes.removeAttribute('data-component-id') %}
+
+    <div class="mx-auto max-w-2xl">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            {{ 'Welcome back'|trans }}, {{ user.displayname }}
+        </h1>
+        <p class="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-400">
+            « Dès lors que vous aurez goûté au vol, vous marcherez à jamais les yeux tournés vers le ciel, car c'est là que vous
+            êtes allés, et c'est là que toujours vous désirerez ardemment retourner. »
+        </p>
+        <p class="text-sm italic">Léonard De Vinci</p>
+    </div>
+
+    <article{{ attributes.addClass('profile') }}>
+        {% if content %}
+
+        <div class="mt-20 max-w-96 mx-auto text-center">
+
+            {% if user.user_picture is not empty %}
+            <img class="mx-auto h-56 w-56 rounded-full" src="{{ file_url(user.user_picture.entity.fileuri) }}"
+                alt="User picture" />
+            {% else %}
+            {# Display a default avatar. Adjust the path to your default image as needed. #}
+            <img class="mx-auto h-56 w-56 rounded-full"
+                src="/{{ active_theme_path() }}/components/user/user/images/default-avatar.svg" alt="">
+            {% endif %}
+            {# user_picture #}
+            <h3 class="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">{{ user.displayname }}</h3>
+            <div class="text-sm leading-6 text-gray-600">{{ content|without('user_picture') }}</div>
+        </div>
+
+        {% endif %}
+        </article>
+</div>
+{% endblock %}

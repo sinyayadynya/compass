@@ -1,0 +1,11 @@
+global:
+  version: 1.X
+  css:
+    theme:
+      dist/styles.css: {}
+  js:
+    dist/main.bundle.js: { attributes: { type: 'module'}}
+    # src/reload-client.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

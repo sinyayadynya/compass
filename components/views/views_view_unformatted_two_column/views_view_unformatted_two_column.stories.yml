@@ -1,0 +1,30 @@
+title: compass/components/views/Views View Unformatted Two Column
+parameters:
+  sourceLink: 'compass:views_view_unformatted_two_column'
+stories:
+  - name: 1. Default
+    args:
+      view_id: my_frontpage
+      display_id: page_1
+      row_class: ''
+      content: |
+        {% set code = "
+        $view = \Drupal::service('entity_type.manager')->getStorage('view')
+          ->load($view_id)->getExecutable();
+        $view->setDisplay($display_id);
+        $style = [
+          'type' => 'default',
+          'options' =>
+          [
+            'grouping' =>
+            [
+            ],
+            'row_class' => $row_class,
+            'default_row_class' => true,
+          ],
+        ];
+        $view->display_handler->overrideOption('style', $style);
+        $view->preview();
+        return \Drupal::service('renderer')->render($view->render());
+        " %}
+        {{ code|php|raw }}}

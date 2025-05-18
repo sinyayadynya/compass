@@ -1,0 +1,8 @@
+{
+  "plugins" : [
+    "prettier-plugin-tailwindcss",
+    "@zackad/prettier-plugin-twig-melody"
+  ]
+  "printWidth" : 80,
+  "tabWidth" : 4
+}

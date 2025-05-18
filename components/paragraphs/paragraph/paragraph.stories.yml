@@ -1,0 +1,13 @@
+title: tripping/components/paragraphs/Paragraph
+parameters:
+ sourceLink: 'compass:paragraph'
+stories:
+  - name: 1. Paragraph
+    args:
+      entity_id: 1
+      entity_type: paragraph
+      view_mode: default
+      langcode: ''
+      check_access: true
+      paragraph_content: |
+        {{ drupal_entity(entity_type, entity_id, view_mode, langcode, check_access) }}

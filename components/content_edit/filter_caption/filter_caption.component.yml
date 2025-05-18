@@ -1,0 +1,25 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Filter Caption
+status: stable
+props:
+  type: object
+  properties:
+    node:
+      type: string
+      title: Node
+      description: The img HTML node.
+    caption:
+      type: string
+      title: Caption
+    tag:
+      type: string
+      title: Tag
+      description: The HTML tag of the node with data-caption attribute.
+    classes:
+      type: string
+      title: Classes
+      description: The additional css classes.
+slots:
+  content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

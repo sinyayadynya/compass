@@ -1,0 +1,79 @@
+<footer class="bg-white" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
+    <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+      <a href="{{ url('<front>') }}" class="block h-7 w-7">
+            <img class="h-7 w-auto" src="/{{ active_theme_path() }}/images/logos/mark.svg" alt="Your Company">
+        </a>
+      <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+        <div class="md:grid md:grid-cols-2 md:gap-8">
+          <div>
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">{{ 'News'|trans }}</h3>
+            <ul role="list" class="mt-6 space-y-4">
+
+                {# Get menu items #}
+                {% set items = simplify_menu('services') %}
+                {# Iterate menu tree #}
+                    {% for menu_item in items.menu_tree %}
+                    {% set active = (menu_item.active) ? 'is-active ' : ' ' %}
+                        <li>
+                        <a href="{{ menu_item.url }}" class="{{ active }} text-sm leading-6 text-gray-600 hover:text-gray-900">
+                            {{ menu_item.text }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+          </div>
+          <div class="mt-10 md:mt-0">
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">{{ 'Team'|trans }}</h3>
+            <ul role="list" class="mt-6 space-y-4">
+              {# Get menu items #}
+                {% set items = simplify_menu('solution-packs') %}
+                {# Iterate menu tree #}
+                    {% for menu_item in items.menu_tree %}
+                    {% set active = (menu_item.active) ? 'is-active ' : ' ' %}
+                        <li>
+                        <a href="{{ menu_item.url }}" class="{{ active }} text-sm leading-6 text-gray-600 hover:text-gray-900">
+                            {{ menu_item.text }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="md:grid md:grid-cols-2 md:gap-8">
+          <div>
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">{{ 'About'|trans }}</h3>
+            <ul role="list" class="mt-6 space-y-4">
+                {# Get menu items #}
+                {% set items = simplify_menu('company') %}
+                {# Iterate menu tree #}
+                    {% for menu_item in items.menu_tree %}
+                    {% set active = (menu_item.active) ? 'is-active ' : ' ' %}
+                        <li>
+                        <a href="{{ menu_item.url }}" class="{{ active }} text-sm leading-6 text-gray-600 hover:text-gray-900">
+                            {{ menu_item.text }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+          </div>
+          <div class="mt-10 md:mt-0">
+            <h3 class="text-sm font-semibold leading-6 text-gray-900">Legal</h3>
+            <ul role="list" class="mt-6 space-y-4">
+              <li>
+                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Claim</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Privacy</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Terms</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

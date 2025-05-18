@@ -1,0 +1,34 @@
+title: compass/components/misc/Status Messages
+parameters:
+  sourceLink: 'compass:status_messages'
+argTypes:
+  message_type:
+    control: inline-radio
+    options:
+      STATUS: 'status'
+      WARNING: 'warning'
+      ERROR: 'error'
+stories:
+  - name: 1. Default
+    args:
+      message_type: 'status'
+      message_text: 'My message'
+      content: |
+        {% set code = "
+        $messenger = \Drupal::messenger();
+        $messenger->addMessage($message_text, $message_type);
+        $messenger->addStatus('Status message');
+        $messenger->addWarning('Warning message');
+        $messenger->addError('Error message');
+        $array = [
+          '#theme' => 'status_messages',
+          '#message_list' => $messenger->deleteAll(),
+          '#status_headings' => [
+            'status' => t('Status message'),
+            'error' => t('Error message'),
+            'warning' => t('Warning message'),
+          ],
+        ];
+        return \Drupal::service('renderer')->render($array);
+        " %}
+        {{ code|php|raw }}

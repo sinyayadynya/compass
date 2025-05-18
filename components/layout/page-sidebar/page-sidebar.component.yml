@@ -1,0 +1,25 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
+name: Page Sidebar
+status: stable
+libraryOverrides:
+  dependencies:
+    - core/drupal.dialog
+  css:
+    component:
+      page-sidebar.css: {}
+      css/components/dialog.css: {}
+      css/components/ui-dialog.css: {}
+      css/components/icons.css: {}
+      css/components/button.css: {}
+      css/components/link.css: {}
+      css/components/more-link.css: {}
+props:
+  type: object
+  properties:
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+slots:
+  page_content:
+    title: Example content slot
+    description: Optionally wrap your sdc template content into {% block content %}{% endblock %}.

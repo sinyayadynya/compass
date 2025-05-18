@@ -1,0 +1,14 @@
+title: compass/components/field/Field  Text
+parameters:
+  sourceLink: 'compass:field__text'
+stories:
+  - name: 1. Default
+    args:
+      entity_id: 1
+      entity_type: node
+      field_name: field_my_text
+      view_mode: default
+      langcode: ''
+      check_access: true
+      content: |
+        {{ drupal_field(field_name, entity_type, entity_id, view_mode, langcode, check_access) }}

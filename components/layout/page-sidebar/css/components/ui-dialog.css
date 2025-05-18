@@ -1,0 +1,8 @@
+/**
+ * @file
+ * Styles for modal windows.
+ */
+
+.ui-dialog--narrow {
+    @apply max-w-lg sm:min-w-[95%] sm:max-w-[95%];
+}

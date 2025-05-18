@@ -1,0 +1,51 @@
+/**
+ * @file
+ * Base styles for dropbuttons.
+ * @see web/core/dropbutton/dropbutton.css
+ */
+
+[data-component-id="compass:dropbutton_wrapper"] {
+  /* Add your styles here */
+}
+.js [data-component-id="compass:dropbutton_wrapper"] .dropbutton-wrapper,
+.js [data-component-id="compass:dropbutton_wrapper"] .dropbutton-widget {
+    @apply relative block;
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton-wrapper,
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton-wrapper div {
+  box-sizing: border-box;
+}
+.js [data-component-id="compass:dropbutton_wrapper"] .dropbutton-widget {
+    @apply border border-gray-300 bg-white;
+}
+.js [data-component-id="compass:dropbutton_wrapper"] .dropbutton-widget:hover {
+    @apply border-gray-400;
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton .dropbutton-action > * {
+    @apply py-0.5 px-2 whitespace-nowrap;
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton .secondary-action {
+    @apply border-t border-gray-200;
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton-multiple .dropbutton {
+    @apply border-r border-gray-200;
+}
+[dir="rtl"] [data-component-id="compass:dropbutton_wrapper"] .dropbutton-multiple .dropbutton {
+    @apply border-r-0 border-l border-gray-200;
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
+    @apply mr-1;
+}
+[dir="rtl"] [data-component-id="compass:dropbutton_wrapper"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
+    @apply mr-0 ml-1;
+}
+/* VVP styles */
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton.dropbutton--default {
+  font-size: inherit;
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton.dropbutton--small {
+    @apply text-[10px];
+}
+[data-component-id="compass:dropbutton_wrapper"] .dropbutton.dropbutton--large {
+    @apply text-xl;
+}

@@ -1,0 +1,6 @@
+[data-component-id="compass:views_exposed_form"] {
+  /* Add your styles here */
+}
+[data-component-id="compass:views_exposed_form"] label {
+    @apply table;
+}

@@ -1,0 +1,12 @@
+/**
+ * @file
+ * Table sort indicator.
+ * @see css/components/tablesort.css
+ */
+
+[data-component-id="compass:table"] th.is-active img {
+    @apply inline-block;
+}
+[data-component-id="compass:table"] td.is-active {
+    @apply bg-gray-200;
+}

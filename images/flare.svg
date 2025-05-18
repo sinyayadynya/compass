@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="798px" height="253px" viewBox="0 0 798 253" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>flare</title>
+    <defs>
+        <linearGradient x1="3.03837206e-14%" y1="52.3015334%" x2="88.363406%" y2="47.8763198%" id="linearGradient-1">
+            <stop stop-color="#CCEDF9" offset="0%"></stop>
+            <stop stop-color="#009CDE" offset="20.3788238%"></stop>
+            <stop stop-color="#006AA9" offset="54.0902799%"></stop>
+            <stop stop-color="#12285F" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-26.7%" y="-81.1%" width="153.5%" height="262.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="50" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="flare" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.637369792">
+        <ellipse id="Oval" fill="url(#linearGradient-1)" filter="url(#filter-2)" transform="translate(438.9374, -16.7313) rotate(-15) translate(-438.9374, 16.7313)" cx="438.937353" cy="-16.7312714" rx="280.5" ry="92.5"></ellipse>
+    </g>
+</svg>

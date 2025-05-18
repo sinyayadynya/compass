@@ -1,0 +1,50 @@
+title: compass/components/form/Details
+parameters:
+  sourceLink: 'compass:details'
+stories:
+  - name: 1. Default
+    args:
+      title: 'My Title'
+      errors: 'My errors'
+      description: 'My Description'
+      children: '<div>My Children</div>'
+      value: '<div><mark>My Value</mark></div>'
+      content: |
+        {% set children %}
+          {{ children|raw }}
+        {% endset %}
+        {% set value %}
+          {{ value|raw }}
+        {% endset %}
+        {% include 'compass:details' %}
+  - name: 2. Add Form
+    args:
+      entity_type: node
+      bundle: my_article
+      field_name: field_my_file
+      view_mode: default
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, NULL, $view_mode, [
+          'type' => $bundle,
+        ], $check_access)[$field_name]['widget'];
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}
+  - name: 3. Edit Form
+    args:
+      entity_type: node
+      entity_id: 1
+      field_name: field_my_file
+      view_mode: edit
+      check_access: false
+      content: |
+        {% set code = "
+        $tweak = '\\\Drupal\\\\twig_tweak\\\TwigTweakExtension';
+        $field = $tweak::drupalEntityForm($entity_type, $entity_id, $view_mode, [
+        ], $check_access)[$field_name]['widget'];
+        return \Drupal::service('renderer')->render($field);
+        " %}
+        {{ code|php|raw }}

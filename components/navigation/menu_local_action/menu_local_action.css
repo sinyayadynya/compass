@@ -1,0 +1,47 @@
+/**
+ * @file
+ * Styles for link buttons and action links.
+ * @see css/components/button.css
+ * @see css/components/action-links.css
+ */
+
+[data-component-id="compass:menu_local_action"] {
+    /* Add your styles here */
+}
+.action-links {
+    /* Add your styles here */
+}
+[dir="rtl"] [data-component-id="compass:menu_local_action"] {
+    /* Add your styles here */
+}
+[data-component-id="compass:menu_local_action"] li {
+    @apply my-1.5;
+}
+.action-links [data-component-id="compass:menu_local_action"] li:first-child {
+    /* Add your styles here */
+}
+[dir="rtl"] .action-links [data-component-id="compass:menu_local_action"] li:first-child {
+    /* Add your styles here */
+}
+[data-component-id="compass:menu_local_action"] .button-action {
+    @apply inline-flex items-center gap-x-1.5 rounded-md bg-primary-50 px-2.5 py-1.5 text-sm font-semibold text-primary-600 shadow-sm hover:bg-primary-100;
+    /* Add your styles here */
+}
+[data-component-id="compass:menu_local_action"] .button-action::before {
+    /* margin-left: -0.1em;
+    padding-right: 0.2em;
+    font-weight: 900; */
+    content: "+";
+    @apply -ml-px pr-1 font-semibold;
+}
+[dir="rtl"] [data-component-id="compass:menu_local_action"] .button-action::before {
+    /* Add your styles here */
+}
+/* VVP styles*/
+[data-component-id="compass:menu_local_action"] .button--primary {
+    /* Add your styles here */
+}
+[data-component-id="compass:menu_local_action"] a:focus,
+[data-component-id="compass:menu_local_action"] a:hover {
+    /* Add your styles here */
+}
