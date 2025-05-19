@@ -44,7 +44,7 @@
 #}
 {% block page_content %}
 	<div class="layout-container isolate" data-component-id="{{ attributes['data-component-id'] }}">
-        <div class="group" x-data="{ sidebarCollapsed: $persist(false).as('sidebar-collapsed') }" :data-sidebar-collapsed="sidebarCollapsed ? true : undefined" x-init="
+        <div class="group pb-30" x-data="{ sidebarCollapsed: $persist(false).as('sidebar-collapsed') }" :data-sidebar-collapsed="sidebarCollapsed ? true : undefined" x-init="
             // Initialize the Alpine.js store for sidebar state management
             Alpine.store('sidebar', {
                 collapsed: sidebarCollapsed,
@@ -63,9 +63,10 @@
                 Alpine.store('sidebar').collapsed = value;
             });
         ">
-            <aside
-                class="fixed inset-y-0 left-0 w-2xs overflow-y-auto border-r border-gray-950/10 group-data-sidebar-collapsed:hidden max-xl:hidden dark:border-white/10"
-                role="complementary">
+        <aside
+            class="fixed inset-y-0 w-2xs overflow-y-auto border-r border-gray-950/10 group-data-sidebar-collapsed:hidden max-xl:hidden dark:border-white/10
+            {{ logged_in and is_admin ? 'left-18' : 'left-0' }}"
+            role="complementary">
                 <nav aria-label="Course" class="px-6 py-4">
                     <div class="sticky top-4 flex h-6">
                         <button type="button"
