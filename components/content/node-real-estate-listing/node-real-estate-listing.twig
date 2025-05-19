@@ -99,35 +99,59 @@
                     </div>
 
                     <div class="mt-7 max-w-lg text-base/7 text-pretty text-gray-600 dark:text-gray-400">
-                        {{ content.schema_additional_type }}
+                        {{ content.schema_description_short }}
                     </div>
 
                     <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-gray-950 sm:gap-3 dark:text-white">
                         <div class="flex items-center gap-1.5">
                             <svg viewBox="0 0 16 16" fill="none" class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0">
                                 <path
-                                    d="M13.5 12.5V.5H4.5M13.5 12.5l-.26.39c-.45.67-.45 1.48 0 2.15l.26.46H4c-.83 0-1.5-.67-1.5-1.5v0M13.5 12.5H4.5M2.5 14V2.5C2.5 1.4 3.4.5 4.5.5v0M2.5 14c0-.83.67-1.5 1.5-1.5h.5M4.5.5v12"
-                                    stroke-linejoin="round">
+                                    d="M1 14.5V8.25S3.75 7 8.25 7s7.25 1.25 7.25 1.25v6.25M1 14.5h14.5M1 14.5v1m14.5-1v1M2 5.5V2m0 0h12.5M2 2V1m12.5 1v3.5m0-3.5V1">
                                 </path>
                             </svg>
-                            4 modules
+                            {% if node.schema_main_entity_of_page.entity %}
+                                {% set paragraph = node.schema_main_entity_of_page.entity %}
+                                {% if paragraph.bundle in ['house', 'apartment'] %}
+                                    {% set field_value = paragraph.schema_num_of_bedrooms.value %}
+                                    {{ field_value }} {{ field_value == 1 ? 'bedroom' : 'bedrooms' }}
+                                {% endif %}
+                            {% endif %}
                         </div>
                         <span class="hidden text-gray-950/25 sm:inline dark:text-white/25">·</span>
                         <div class="flex items-center gap-1.5">
                             <svg viewBox="0 0 16 16" fill="none" class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0">
                                 <path
-                                    d="M10.5 4.5H6.5c-.55 0-1 .45-1 1v6m4-7h3c.55 0 1 .45 1 1v9c0 .55-.45 1-1 1H6.5c-.55 0-1-.45-1-1v-3m4-7V1.5c0-.55-.45-1-1-1h-7c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h3">
+                                    d="M7 9a2 2 0 0 1 2-2h4.5a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9ZM1 5.5 2.25 4 3.5 5.5M7.5 3.5 6.25 2.25 7.5 1M14.25 3.5l1.25-1.25L14.25 1M1 14l1.25 1.5L3.5 14M2.25 14.75v-10M15.25 2.25h-8">
                                 </path>
                             </svg>
-                            20 lessons
+                            {% if node.schema_main_entity_of_page.entity %}
+                                {% set paragraph = node.schema_main_entity_of_page.entity %}
+                                {% if paragraph.bundle in ['house', 'apartment'] %}
+                                    {{ paragraph.schema_floor_size.value }} m²
+                                {% endif %}
+                            {% endif %}
                         </div>
                         <span class="hidden text-gray-950/25 sm:inline dark:text-white/25">·</span>
                         <div class="flex items-center gap-1.5">
                             <svg viewBox="0 0 16 16" fill="none" class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0">
-                                <circle cx="8" cy="8" r="7.5"></circle>
-                                <path d="M8 4V8H12"></path>
+                                <path d="M12.5 6.25c0 4-6.25 8.25-6.25 8.25S0 10.25 0 6.25C0 2.75 2.936 0 6.25 0s6.25 2.75 6.25 6.25Z"
+                                    transform="translate(2 1)">
+                                </path>
+                                <circle cx="6.25" cy="6.25" r="2.25" transform="translate(2 1)" />
                             </svg>
-                            3 hr 26 min
+                            {% if node.schema_main_entity_of_page.entity %}
+                                {% set paragraph = node.schema_main_entity_of_page.entity %}
+                                {% if paragraph.bundle in ['house', 'apartment'] %}
+                                    {% if paragraph.schema_address.address_line2 %}
+                                        {{ paragraph.schema_address.address_line2 }}
+                                    {% else %}
+                                        {{ paragraph.schema_address.address_line1 }}
+                                    {% endif %}
+                                    {% if paragraph.schema_address.locality %}
+                                        , {{ paragraph.schema_address.locality }}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
 
@@ -149,14 +173,14 @@
                         <div class="col-span-full sm:col-span-1">
                             <div class="-mt-px inline-flex border-t border-gray-950 pt-px dark:border-white">
                                 <div class="pt-4 text-sm/7 font-semibold text-gray-950 sm:pt-10 dark:text-white">
-                                    Style
+                                    Type
                                 </div>
                             </div>
                         </div>
                         <div class="col-span-full pt-6 sm:col-span-3 sm:pt-10">
                             <div class="max-w-2xl">
                                 <h2 class="text-2xl/7 font-medium tracking-tight text-pretty text-gray-950 dark:text-white">
-                                    Traditional Cycladic, whitewashed with blue accents
+                                    {{ content.schema_additional_type }}
                                 </h2>
                                 <div class="mt-4 text-base/7 text-gray-700 sm:text-sm/7 dark:text-gray-400">
                                     {{ content.body }}
